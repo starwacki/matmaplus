@@ -12,9 +12,6 @@ public class MatmaPlusplApplication {
 	public static void main(String[] args) {
 
 		SpringApplication.run(MatmaPlusplApplication.class, args);
-
-
-
 	}
 
 

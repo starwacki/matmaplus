@@ -19,13 +19,13 @@
 		<span class="navbar-toggler-icon"></span>
 	</button>
 	<!-- Collection of nav links, forms, and other content for toggling -->
-	<div id="navbarCollapse" class="collapse navbar-collapse justify-content-start">
-		<div class="navbar-nav" style="position: absolute; left:50%">
-			<a href="mainview.html" class="nav-item nav-link" >Strona główna</a>
-			<a href="aboutauthor.html" class="nav-item nav-link">O Autorze</a>			
-			<a href="shop.html" class="nav-item nav-link active">Sklep</a>
-			<a href="blog.html" class="nav-item nav-link">Blog</a>
-			<a href="contact.html" class="nav-item nav-link">Contact</a>
+	<div id="navbarCollapse1" class="collapse navbar-collapse justify-content-start">
+        <div class="navbar-nav" style="position: absolute; left:50%">
+            <a th:href="@{/matmaplus}" class="nav-item nav-link" >Strona główna</a>
+            <a th:href="@{/matmaplus/user/courses}" class="nav-item nav-link">Moje kursy</a>
+            <a th:href="@{/matmaplus/shop}" class="nav-item nav-link active">Sklep</a>
+            <a th:href="@{/matmaplus/blog}" class="nav-item nav-link">Blog</a>
+            <a th:href="@{/matmaplus/contact}" class="nav-item nav-link">Contact</a>
         </div>
 		
 		<div class="navbar-nav ml-auto">
@@ -55,12 +55,13 @@
             </div>		
             <div id="navbarCollapse" class="collapse navbar-collapse justify-content-start">
               <div class="navbar-nav">
-                <a href="register.html" class="nav-item nav-link" >Zarejestruj się</a>
+                  <a th:href="@{/matmaplus/register}" class="nav-item nav-link" >Zarejestruj się</a>
                   </div>	
         </div>
 
         
 	</div>
+    </div>
 </nav>
 <main>
     <div class="container d-flex justify-content-center mt-50 mb-50">
@@ -82,7 +83,7 @@
                                     <div class="card-body bg-light text-center">
                                         <div class="mb-2">
                                             <h4 class="font-weight-semibold mb-2">
-                                                <a href="/products-view/analiza-matematyczna.html" class="text-default mb-2" data-abc="true">Analiza matematyczna</a>
+                                                <a th:href="@{/matmaplus/shop/analizapodstawa}" class="text-default mb-2" data-abc="true">Analiza matematyczna</a>
                                             </h4>
                                         </div>
                                         <h3 class="mb-0 font-weight-semibold">50.00 zł</h3>
@@ -111,7 +112,7 @@
                                     <div class="card-body bg-light text-center">
                                         <div class="mb-2">
                                             <h4 class="font-weight-semibold mb-2">
-                                                <a href="/products-view/analiza-matematyczna-roz.html" class="text-default mb-2" data-abc="true">Analiza matematyczna</a>
+                                                <a th:href="@{/matmaplus/shop/analizarozszerzona}" class="text-default mb-2" data-abc="true">Analiza matematyczna</a>
                                             </h4>
                                         </div>
                                         <h3 class="mb-0 font-weight-semibold">99.99 zł</h3>
@@ -126,7 +127,7 @@
                                         <button type="button" class="btn bg-cart"><i class="fa fa-cart-plus mr-2"></i> Dodaj do koszyka</button>
                                     </div>
                                 </div>
-           </div> 
+           </div>
            <div class="col-md-4 mt-2">
                 <div class="card">
                                     <div class="card-body">
@@ -137,7 +138,7 @@
                                     <div class="card-body bg-light text-center">
                                         <div class="mb-2">
                                             <h4 class="font-weight-semibold mb-2">
-                                                <a href="/products-view/kurs-matura-podstawowa.html" class="text-default mb-2" data-abc="true">Kurs matura podstawowa</a>
+                                                <a th:href="@{/matmaplus/shop/maturapodstawowa}" class="text-default mb-2" data-abc="true">Kurs matura podstawowa</a>
                                             </h4>
                                         </div>
                                         <h3 class="mb-0 font-weight-semibold">150.00 zł</h3>
@@ -161,7 +162,7 @@
                                     <div class="card-body bg-light text-center">
                                         <div class="mb-2">
                                             <h4 class="font-weight-semibold mb-2">
-                                                <a href="/products-view/kurs-matura-rozszerzona.html" class="text-default mb-2" data-abc="true">Kurs matura rozszerzona</a>
+                                                <a th:href="@{/matmaplus/shop/maturarozszerzona}" class="text-default mb-2" data-abc="true">Kurs matura rozszerzona</a>
                                             </h4>
                                         </div>
                                         <h3 class="mb-0 font-weight-semibold">199.99 zł</h3>
@@ -187,7 +188,7 @@
                                     <div class="card-body bg-light text-center">
                                         <div class="mb-2">
                                             <h4 class="font-weight-semibold mb-2">
-                                                <a href="/products-view/egzamin-ósmioklasisty.html" class="text-default mb-2" data-abc="true">Egzamin ósmoklasisty</a>
+                                                <a th:href="@{/matmaplus/shop/egzamin-ósmioklasisty}" class="text-default mb-2" data-abc="true">Egzamin ósmoklasisty</a>
                                             </h4>
                                         </div>
                                         <h3 class="mb-0 font-weight-semibold">99.99 zł</h3>
@@ -210,7 +211,7 @@
                                     <div class="card-body bg-light text-center">
                                         <div class="mb-2">
                                             <h4 class="font-weight-semibold mb-2">
-                                                <a href="/products-view/całki-na-studiach.html" class="text-default mb-2" data-abc="true">Całki na studiach</a>
+                                                <a th:href="@{/matmaplus/shop/całki}" class="text-default mb-2" data-abc="true">Całki na studiach</a>
                                             </h4>
                                         </div>
                                         <h3 class="mb-0 font-weight-semibold">150.00 zł</h3>

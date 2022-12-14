@@ -20,13 +20,13 @@
 		<span class="navbar-toggler-icon"></span>
 	</button>
 	<!-- Collection of nav links, forms, and other content for toggling -->
-	<div id="navbarCollapse" class="collapse navbar-collapse justify-content-start">
-		<div class="navbar-nav" style="position: absolute; left:50%">
-			<a href="mainview.html" class="nav-item nav-link" >Strona główna</a>
-			<a href="aboutauthor.html" class="nav-item nav-link">O Autorze</a>			
-			<a href="shop.html" class="nav-item nav-link">Sklep</a>
-			<a href="blog.html" class="nav-item nav-link">Blog</a>
-			<a href="contact.html" class="nav-item nav-link">Contact</a>
+	<div id="navbarCollapse1" class="collapse navbar-collapse justify-content-start">
+        <div class="navbar-nav" style="position: absolute; left:50%">
+            <a th:href="@{/matmaplus}" class="nav-item nav-link" >Strona główna</a>
+            <a th:href="@{/matmaplus/user/courses}" class="nav-item nav-link">Moje kursy</a>
+            <a th:href="@{/matmaplus/shop}" class="nav-item nav-link">Sklep</a>
+            <a th:href="@{/matmaplus/blog}" class="nav-item nav-link">Blog</a>
+            <a th:href="@{/matmaplus/contact}" class="nav-item nav-link">Contact</a>
         </div>
 		
 		<div class="navbar-nav ml-auto">
@@ -62,6 +62,7 @@
 
         
 	</div>
+    </div>
 </nav>
 <main>
     <section class="vh-100" style="background-color: #eee;">
@@ -122,41 +123,4 @@
     </section>
 </main>
 </body>
-<footer class="text-center text-lg-start" style="height: 110px; bottom:0; width:100%;">
-  <div>
-    <hr style="position: relative; top: 15px;">
-
-
-    <div class="text-center text-black p-3" style="position: absolute; left: 20%;" >
-      <i class="fa fa-facebook-official" aria-hidden="true" style="color: black;"></i>  
-     <a href="">
-      <span style="color: black;">Matma<span style="color: green;">PLUS</span></span>
-     </a>  
-    </div>
-    <div class="text-center text-black p-3" style="position: absolute; left: 30%;" >
-      <i class="fa fa-instagram" aria-hidden="true" style="color: black;"></i>
-      <a href="">
-      <span style="color: black;">Matma<span style="color: green;">PLUS</span></span>
-     </a>  
-    </div>
-    <div class="text-center text-black p-3" style="position: absolute; left: 40%;" >
-      <i class="fa fa-github" aria-hidden="true" style="color: black;"></i>
-      <a href="https://github.com/starwacki">
-      <span style="color: black;">starwacki</span>
-     </a>  
-    </div>
-    <div class="text-center text-black p-3" style="position: absolute; left: 50%;" >
-      <i class="fa fa-phone" aria-hidden="true" style="color: black;"></i>
-      <span style="color: black;">+48 000 000 000 </span>
-    </div>
-    <div class="text-center text-black p-3" style="position: absolute; left: 60%;" >
-      <i class="fa fa-envelope-o" aria-hidden="true" style="color: black;"></i>
-      <span style="color: black;">matmapluscompany@gmail.com</span>
-    </div>
-  </div>
-  <div style="position: relative; top: 60px;">
-    <p style="font-size: 13px;">Copyright &copy; 2022 <a href="https://github.com/starwacki" style="color: black;">starwacki</a> </p>
-  </div>
-  
-</footer>
 </html>

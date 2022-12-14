@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="mainview" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Bootstrap Navbar with Inline Login Form in Dropdown</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,600">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
@@ -19,13 +19,13 @@
 		<span class="navbar-toggler-icon"></span>
 	</button>
 	<!-- Collection of nav links, forms, and other content for toggling -->
-	<div id="navbarCollapse" class="collapse navbar-collapse justify-content-start">
+	<div id="navbarCollapse1" class="collapse navbar-collapse justify-content-start">
 		<div class="navbar-nav" style="position: absolute; left:50%">
-			<a href="mainview.html" class="nav-item nav-link active" >Strona główna</a>
-			<a href="aboutauthor.html" class="nav-item nav-link">O Autorze</a>			
-			<a href="shop.html" class="nav-item nav-link">Sklep</a>
-			<a href="blog.html" class="nav-item nav-link">Blog</a>
-			<a href="contact.html" class="nav-item nav-link">Contact</a>
+			<a th:href="@{/matmaplus}" class="nav-item nav-link active" >Strona główna</a>
+			<a th:href="@{/matmaplus/user/courses}" class="nav-item nav-link">Moje kursy</a>
+			<a th:href="@{/matmaplus/shop}" class="nav-item nav-link">Sklep</a>
+			<a th:href="@{/matmaplus/blog}" class="nav-item nav-link">Blog</a>
+			<a th:href="@{/matmaplus/contact}" class="nav-item nav-link">Contact</a>
         </div>
 		
 		<div class="navbar-nav ml-auto">
@@ -55,12 +55,14 @@
             </div>		
             <div id="navbarCollapse" class="collapse navbar-collapse justify-content-start">
               <div class="navbar-nav">
-                <a href="register.html" class="nav-item nav-link" >Zarejestruj się</a>
+                <a th:href="@{/matmaplus/register}" class="nav-item nav-link" >Zarejestruj się</a>
                   </div>	
         </div>
 
         
 	</div>
+    </div>
+
 </nav>
 <main >
 	<div class="jumbotron" style="background-image: url('/resources/tło.png')">
@@ -68,43 +70,52 @@
           <h1 class="display-3" style="font-weight: bolder;">Matma<span style="color: green;">PLUS</span></h1>
           <p style="font-weight: bolder; font-size: 21px;">
 			MatmaPLUS jest portalem skierowanym do każdej osoby chcącej podnieść swoje zdolności matematyczne.
-			Każdy znajdzie tutaj coś dla siebie - oferujemy szeroki zakres kursów przygotowujących do egzaminów
-			na każdym etapie edukacji. Dla fanów królowej nauk oferujemy kursy szeroko wykraczające poza zakres 
+			Każdy znajdzie tutaj coś dla siebie - w ofercie: szeroki zakres kursów przygotowujących do egzaminów
+			na każdym etapie edukacji. Dla fanów królowej nauk oferuję kursy szeroko wykraczające poza zakres 
 			liceum i studiów.
-			
 			</p>
-          <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p>
+          <p><a class="btn btn-primary btn-lg" href="#" role="button">Dowiedz się więcej&raquo;</a></p>
         </div>
       </div>
 
       <div class="container" style="height: 200px;" >
         <div class="row">
           <div class="col-md-4">
-            <h2>Heading</h2>
-            <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-            <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
+            <h3>Dlaczego nasze kursy?</h3>
+            <hr
+                class="mb-4 mt-0 d-inline-block mx-auto"
+                style="width: 150px; background-color: green; height: 2px"
+                />
+            <p> Jesteśmy pasjonatami matematyki! Aktualnie sami uczęszczamy na zajęcia, zdajemy egzaminy - w związku
+              z czym zdajemy sobie sprawę z jakimi problemami borykają się uczniowe. Oferujemy kursy dostosowane 
+              w 100% do ucznia! </p>
           </div>
           <div class="col-md-4">
-            <h2>Heading</h2>
-            <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-            <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
+            <h3>Jak wygląda kurs?</h3>
+            <hr
+            class="mb-4 mt-0 d-inline-block mx-auto"
+            style="width: 150px; background-color: green; height: 2px"
+            />
+            <p> Każdy kurs dzielimy na zagadnienia wyszczególnione w opisie kursu. Do każdego zagadnienia 
+                przypisane są trzy sekcje: sekcja teoretyczna, sekcja zadań według stopnia trudności, test z danego zagadnienia   </p>
           </div>
           <div class="col-md-4">
-            <h2>Heading</h2>
-            <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-            <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
+            <h3>Gwarancja zadowolenia!</h3>
+            <hr
+            class="mb-4 mt-0 d-inline-block mx-auto"
+            style="width: 150px; background-color: green; height: 2px"
+            />
+            <p> Kurs objęty jest miesięczną gwaranacją - jeśli nie spodoba Ci się jakość oferowanych przez nas materiałów -
+                zwrócimy Ci 100% zainwestowanej kwoty!  </p>
           </div>
         </div>
-
-
-      </div> <!-- /container -->
-    
+      </div>
+</main>
+  
 </body>
 <footer class="text-center text-lg-start" style="height: 110px; bottom:-230px; width:100%; position: relative;">
   <div>
     <hr style="position: relative; top: 15px;">
-
-
     <div class="text-center text-black p-3" style="position: absolute; left: 20%;" >
       <i class="fa fa-facebook-official" aria-hidden="true" style="color: black;"></i>  
      <a href="">
@@ -135,6 +146,5 @@
   <div style="position: relative; top: 60px;">
     <p style="font-size: 13px;">Copyright &copy; 2022 <a href="https://github.com/starwacki" style="color: black;">starwacki</a> </p>
   </div>
-  
 </footer>
 </html>

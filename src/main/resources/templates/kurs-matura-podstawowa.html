@@ -19,13 +19,13 @@
 		<span class="navbar-toggler-icon"></span>
 	</button>
 	<!-- Collection of nav links, forms, and other content for toggling -->
-	<div id="navbarCollapse" class="collapse navbar-collapse justify-content-start">
-		<div class="navbar-nav" style="position: absolute; left:50%">
-			<a href="/mainviews/mainview.html" class="nav-item nav-link active">Strona główna</a>
-			<a href="/mainviews/aboutauthor.html" class="nav-item nav-link">O Autorze</a>			
-			<a href="/mainviews/shop.html" class="nav-item nav-link">Sklep</a>
-			<a href="/mainviews/blog.html" class="nav-item nav-link">Blog</a>
-			<a href="/mainviews/contact.html" class="nav-item nav-link">Contact</a>
+	<div id="navbarCollapse1" class="collapse navbar-collapse justify-content-start">
+        <div class="navbar-nav" style="position: absolute; left:50%">
+            <a th:href="@{/matmaplus}" class="nav-item nav-link" >Strona główna</a>
+            <a th:href="@{/matmaplus/user/courses}" class="nav-item nav-link">Moje kursy</a>
+            <a th:href="@{/matmaplus/shop}" class="nav-item nav-link active">Sklep</a>
+            <a th:href="@{/matmaplus/blog}" class="nav-item nav-link">Blog</a>
+            <a th:href="@{/matmaplus/contact}" class="nav-item nav-link">Contact</a>
         </div>
 		
 		<div class="navbar-nav ml-auto">
@@ -55,24 +55,25 @@
             </div>		
             <div id="navbarCollapse" class="collapse navbar-collapse justify-content-start">
               <div class="navbar-nav">
-                <a href="/mainviews/register.html" class="nav-item nav-link" >Zarejestruj się</a>
+                  <a th:href="@{/matmaplus/register}" class="nav-item nav-link" >Zarejestruj się</a>
                   </div>	
         </div>
 
         
 	</div>
+    </div>
 </nav>
 <div class="col-md-4 mt-2">
     <div class="card"  style="position: fixed; top: 75px; left: 150px; width: 600px; height: 600px;">
                         <div class="card-body" >
                             <div class="card-img-actions">   
-                                    <img src="/resources/całki-na-studiach.png" class="card-img img-fluid" width="96" height="350" alt="">
+                                    <img src="/resources/matura-podstaw.png" class="card-img img-fluid" width="96" height="350" alt="">
                             </div>
                         </div>
                         <div class="card-body bg-light text-center">
                             <div class="mb-2">
                                 <h4 class="font-weight-semibold mb-2">
-                                    <a href="#" class="text-default mb-2" data-abc="true">Całki na studiach</a>
+                                    <a href="#" class="text-default mb-2" data-abc="true">Kurs matura podstawowa</a>
                                 </h4>
                             </div>
                             <h3 class="mb-0 font-weight-semibold">150.00 zł</h3>
@@ -80,73 +81,39 @@
                                <i class="fa fa-star star"></i>
                                <i class="fa fa-star star"></i>
                                <i class="fa fa-star star"></i>
-                               <i class="fa fa-star star"></i>
-                               <i class="fa fa-star star"></i>
-                               <i class="fa fa-star star"></i>
                             </div>
-                            <div class="text-muted mb-3">Poziom rozszerzony</div>
+                            <div class="text-muted mb-3">Poziom podstawowy</div>
                             <button type="button" class="btn bg-cart"><i class="fa fa-cart-plus mr-2"></i>Dodaj do koszyka</button>
                         </div>
                     </div>                             
 </div> 
 <div style="position: fixed; top: 75px; left: 850px; width: 500px; height: 500px;">
-    <h2>CAŁKI NA STUDIACH <h5> (rozszerzone) </h5></h2>
+    <h2>KURS MATURA <h5> (podstawowa) </h5> </h2>
         <hr style="border-width: 3px;">
     <div>
-        <p>Po co te całki? Pytanie pada to co roku z ust wielu studentów. W tym kursie poza nauką całek w zakresie 
-            rozszerzonym przede wszystkim nauczysz się jak je stosować w  matematyce oraz innych dziedzinach nauki (fizyka/chemia). 
+        <p>Kurs matury podstawowej zawiera wszystkie niezbędne zagadnienia przygotowujące uczestnika do matury
+            w zakresie podstawowym. Dlaczego warto wybrać nasz kurs? Matura podstawowa to w większości schematyczne, 
+            powtarzające się zadania - z nami nauczysz się je rozwiązywać!
         </p>
         <p>W kursie znajdziesz następujące zagadnienia:</p>
         <ul >
-            <li>Trudne całki oznaczone i nieoznaczone</li>
-            <li>Całki podwójne</li>
-            <li>Zastosowania całek w matematyce</li>
-            <li>Zastosowania całek w fizyce</li>
-            <li>Zastosowania całek w chemii </li>
+            <li>Algebra ( wszystkie możliwe równania)</li>
+            <li>Funkcje elementarne</li>
+            <li>Ciągi</li>
+            <li>Trygonometria</li>
+            <li>Planimetria</li>
+            <li>Geometria analityczna</li>
+            <li>Stereometria</li>
+            <li>Prawdopodobieństwo i kombinatoryka</li>
+
           </ul>
           <p></p>
-          <p>Dodatkowo: Do kursu dodajemy zestaw zadań z rozwiązaniami oraz praktyczne przykłady zastosowania całek.
+          <p>Dodatkowo: Do kursu dodajemy dodatkowe zestawy zadań wraz z rozwiązaniami i omówieniem - według nas nauka
+            poprzez praktykę jest najlepsza!
           </p>
           
     </div>
 </div>    
 </div>   
 </body>
-<footer class="text-center text-lg-start" style="position: absolute; height: 110px; bottom:0; width:100%;">
-    <div>
-      <hr style="position: relative; top: 15px;">
-  
-  
-      <div class="text-center text-black p-3" style="position: fixed; left: 20%;" >
-        <i class="fa fa-facebook-official" aria-hidden="true" style="color: black;"></i>  
-       <a href="">
-        <span style="color: black;">Matma<span style="color: green;">PLUS</span></span>
-       </a>  
-      </div>
-      <div class="text-center text-black p-3" style="position: fixed; left: 30%;" >
-        <i class="fa fa-instagram" aria-hidden="true" style="color: black;"></i>
-        <a href="">
-        <span style="color: black;">Matma<span style="color: green;">PLUS</span></span>
-       </a>  
-      </div>
-      <div class="text-center text-black p-3" style="position: fixed; left: 40%;" >
-        <i class="fa fa-github" aria-hidden="true" style="color: black;"></i>
-        <a href="https://github.com/starwacki">
-        <span style="color: black;">starwacki</span>
-       </a>  
-      </div>
-      <div class="text-center text-black p-3" style="position: fixed; left: 50%;" >
-        <i class="fa fa-phone" aria-hidden="true" style="color: black;"></i>
-        <span style="color: black;">+48 000 000 000 </span>
-      </div>
-      <div class="text-center text-black p-3" style="position: fixed; left: 60%;" >
-        <i class="fa fa-envelope-o" aria-hidden="true" style="color: black;"></i>
-        <span style="color: black;">matmapluscompany@gmail.com</span>
-      </div>
-    </div>
-    <div style="position: relative; top: 60px;">
-      <p style="font-size: 13px;">Copyright &copy; 2022 <a href="https://github.com/starwacki" style="color: black;">starwacki</a> </p>
-    </div>
-    
-  </footer>
 </html>

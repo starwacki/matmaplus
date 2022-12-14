@@ -19,14 +19,14 @@
 		<span class="navbar-toggler-icon"></span>
 	</button>
 	<!-- Collection of nav links, forms, and other content for toggling -->
-	<div id="navbarCollapse" class="collapse navbar-collapse justify-content-start">
+	<div id="navbarCollapse1" class="collapse navbar-collapse justify-content-start">
 		<div class="navbar-nav" style="position: absolute; left:50%">
-			<a href="mainview.html" class="nav-item nav-link" >Strona główna</a>
-			<a href="aboutauthor.html" class="nav-item nav-link">O Autorze</a>			
-			<a href="shop.html" class="nav-item nav-link">Sklep</a>
-			<a href="blog.html" class="nav-item nav-link">Blog</a>
-			<a href="contact.html" class="nav-item nav-link active">Contact</a>
-        </div>
+			<a th:href="@{/matmaplus}" class="nav-item nav-link " >Strona główna</a>
+			<a th:href="@{/matmaplus/user/courses}" class="nav-item nav-link">Moje kursy</a>
+			<a th:href="@{/matmaplus/shop}" class="nav-item nav-link">Sklep</a>
+			<a th:href="@{/matmaplus/blog}" class="nav-item nav-link">Blog</a>
+			<a th:href="@{/matmaplus/contact}" class="nav-item nav-link active">Contact</a>
+		</div>
 		
 		<div class="navbar-nav ml-auto">
 			<div class="nav-item dropdown login-dropdown">
@@ -55,11 +55,12 @@
             </div>		
             <div id="navbarCollapse" class="collapse navbar-collapse justify-content-start">
               <div class="navbar-nav">
-                <a href="register.html" class="nav-item nav-link" >Zarejestruj się</a>
+				  <a th:href="@{/matmaplus/register}" class="nav-item nav-link" >Zarejestruj się</a>
                   </div>	
         </div>
 
         
+	</div>
 	</div>
 </nav>
 <main>

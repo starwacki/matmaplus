@@ -1,6 +1,4 @@
-package plmatmaplus.matmapluspl.model.entity;
-
-import org.springframework.lang.NonNull;
+package plmatmaplus.matmapluspl.entity;
 
 import javax.persistence.*;
 import java.util.HashSet;

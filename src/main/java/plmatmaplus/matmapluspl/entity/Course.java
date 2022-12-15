@@ -1,4 +1,4 @@
-package plmatmaplus.matmapluspl.model.entity;
+package plmatmaplus.matmapluspl.entity;
 
 
 import javax.persistence.*;

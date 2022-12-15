@@ -1,7 +1,9 @@
-package plmatmaplus.matmapluspl.controler;
+package plmatmaplus.matmapluspl.controller.templatescontroller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import plmatmaplus.matmapluspl.dto.UserRegisterDTO;
 
 
 @Controller
@@ -23,7 +25,9 @@ public class MainPageController {
     }
 
     @RequestMapping("/matmaplus/register")
-    public String register() {
+    public String register(Model model) {
+        UserRegisterDTO user = new UserRegisterDTO();
+        model.addAttribute("userRegisterDTO", user);
         return "register.html";
     }
 

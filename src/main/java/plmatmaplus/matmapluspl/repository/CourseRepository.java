@@ -3,7 +3,7 @@ package plmatmaplus.matmapluspl.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import plmatmaplus.matmapluspl.model.entity.Course;
+import plmatmaplus.matmapluspl.entity.Course;
 
 import java.util.List;
 

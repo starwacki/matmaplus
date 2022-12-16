@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Bootstrap Navbar with Inline Login Form in Dropdown</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,600">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/resources/styles.css">
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a href="#" class="navbar-brand">Matma<b>PLUS</b></a>
+  <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <!-- Collection of nav links, forms, and other content for toggling -->
+  <div id="navbarCollapse1" class="collapse navbar-collapse justify-content-start">
+    <div class="navbar-nav" >
+      <a th:href="@{/matmaplus}" class="nav-item nav-link" >Strona główna</a>
+      <a th:href="@{/user/courses}" class="nav-item nav-link">Moje kursy</a>
+      <a th:href="@{/matmaplus/shop}" class="nav-item nav-link">Sklep</a>
+      <a th:href="@{/matmaplus/blog}" class="nav-item nav-link">Blog</a>
+      <a th:href="@{/matmaplus/contact}" class="nav-item nav-link">Contact</a>
+    </div>
+
+    <div id="navbarLogin" class="collapse navbar-collapse justify-content-start" style="position: absolute; left:80%">
+      <div class="navbar-nav">
+        <a th:href="@{/matmaplus/login}" class="nav-item nav-link" >Zaloguj się</a>
+      </div>
+    </div>
+    <div id="navbarCollapse" class="collapse navbar-collapse justify-content-start" style="position: absolute; left:90%">
+      <div class="navbar-nav">
+        <a th:href="@{/matmaplus/register}" class="nav-item nav-link" >Zarejestruj się</a>
+      </div>
+    </div>
+
+
+    </div>
+  </div>
+</nav>
+
+<main>
+  <section class="vh-100">
+    <div class="container-fluid h-custom">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-md-9 col-lg-6 col-xl-5">
+          <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp"
+               class="img-fluid" alt="Sample image">
+        </div>
+        <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1" style="position: relative; top: 50px;">
+          <form>
+            <p class="text-center fw-bold mx-3 mb-0"  style="font-size: 35px;">Login</p>
+            <!-- Email input -->
+            <div class="form-outline mb-4">
+              <input type="email" id="form3Example3" class="form-control form-control-lg"
+                     placeholder="Enter a valid email address" />
+              <label class="form-label" for="form3Example3">Email address</label>
+            </div>
+
+            <!-- Password input -->
+            <div class="form-outline mb-3">
+              <input type="password" id="form3Example4" class="form-control form-control-lg"
+                     placeholder="Enter password" />
+              <label class="form-label" for="form3Example4">Password</label>
+            </div>
+
+            <div class="d-flex justify-content-between align-items-center">
+              <!-- Checkbox -->
+              <div class="form-check mb-0">
+                <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3" />
+                <label class="form-check-label" for="form2Example3">
+                  Remember me
+                </label>
+              </div>
+              <a href="#!" class="text-body">Forgot password?</a>
+            </div>
+
+            <div class="text-center text-lg-start mt-4 pt-2">
+              <button type="button" class="btn btn-primary btn-lg"
+                      style="padding-left: 2.5rem; padding-right: 2.5rem;">Login</button>
+              <p class="small fw-bold mt-2 pt-1 mb-0">Don't have an account? <a href="#!"
+                                                                                class="link-danger">Register</a></p>
+            </div>
+
+          </form>
+        </div>
+      </div>
+    </div>
+
+  </section>
+</main>
+</body>
+<footer class="text-center text-lg-start" style="position: absolute; height: 50px; bottom:0; width:100%;">
+  <div>
+    <hr style="position: relative; top: 15px;">
+
+
+    <div class="text-center text-black p-3" style="position: relative; left: -10%; display: inline-block;" >
+      <i class="fa fa-facebook-official" aria-hidden="true" style="color: black;"></i>
+      <a href="">
+        <span style="color: black;">Matma<span style="color: green;">PLUS</span></span>
+      </a>
+    </div>
+    <div class="text-center text-black p-3" style="position: relative; left: 0%; display: inline-block;" >
+      <i class="fa fa-instagram" aria-hidden="true" style="color: black;"></i>
+      <a href="">
+        <span style="color: black;">Matma<span style="color: green;">PLUS</span></span>
+      </a>
+    </div>
+    <div class="text-center text-black p-3" style="position: relative; left: 7%; display: inline-block;" >
+      <i class="fa fa-github" aria-hidden="true" style="color: black;"></i>
+      <a href="https://github.com/starwacki">
+        <span style="color: black;">starwacki</span>
+      </a>
+    </div>
+    <div class="text-center text-black p-3" style="position: relative; left: 14%; display: inline-block;" >
+      <i class="fa fa-phone" aria-hidden="true" style="color: black;"></i>
+      <span style="color: black;">+48 000 000 000 </span>
+    </div>
+    <div class="text-center text-black p-3" style="position: relative; left: 18%; display: inline-block;" >
+      <i class="fa fa-envelope-o" aria-hidden="true" style="color: black;"></i>
+      <span style="color: black;">matmapluscompany@gmail.com</span>
+    </div>
+  </div>
+  <div style="position: relative; top: -5px; display: inline-block;">
+    <p style="font-size: 13px;">Copyright &copy; 2022 <a href="https://github.com/starwacki" style="color: black;">starwacki</a> </p>
+  </div>
+
+</footer>
+</html>

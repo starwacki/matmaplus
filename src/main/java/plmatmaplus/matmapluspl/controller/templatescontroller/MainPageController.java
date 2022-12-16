@@ -37,9 +37,13 @@ public class MainPageController {
     }
 
     //Will be removed with user courses in the future!
-    @RequestMapping("/matmaplus/user/courses")
+    @RequestMapping("/user/courses")
     public String userCourses() {
-        return "aboutauthor.html";
+        return "usercourses.html";
     }
 
+    @RequestMapping("/matmaplus/login")
+    public String login() {
+        return "login.html";
+    }
 }

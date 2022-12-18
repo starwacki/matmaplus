@@ -1,6 +1,7 @@
 package plmatmaplus.matmapluspl.entity;
 
 import lombok.*;
+import org.hibernate.annotations.Fetch;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -11,9 +12,8 @@ import java.util.Set;
 @Getter
 @Setter
 @NoArgsConstructor
-@ToString
 @RequiredArgsConstructor
-public class User {
+public class UserEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,7 +30,8 @@ public class User {
     private String email;
 
     @ManyToMany (
-            cascade = {CascadeType.MERGE})
+            cascade = {CascadeType.MERGE},
+            fetch = FetchType.EAGER)
     @JoinTable(
             name = "users_courses",
             joinColumns = @JoinColumn(name = "users_idusers"),
@@ -38,12 +39,29 @@ public class User {
     )
     private Set<Course> courses = new HashSet<>();
 
+    @ManyToMany (
+            fetch = FetchType.EAGER
+    )
+    @JoinTable(name = "users_roles",
+            joinColumns = @JoinColumn(name = "iduser"),
+            inverseJoinColumns = @JoinColumn(name = "idrole"))
+    private Set<Role> roles = new HashSet<>();
+
     public void addCourseToUser(Course course) {
-        if (courses==null) {
-            courses = new HashSet<>();
             courses.add(course);
-        }
-        else courses.add(course);
     }
 
+    public void addRolesToUser(Role role) {
+         roles.add(role);
+    }
+
+    @Override
+    public String toString() {
+        return "UserEntity{" +
+                "idUsers=" + idUsers +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", email='" + email + '\'' +
+                '}';
+    }
 }

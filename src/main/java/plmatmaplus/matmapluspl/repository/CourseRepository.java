@@ -13,4 +13,5 @@ public interface CourseRepository extends JpaRepository<Course,Long> {
     List<Course> findAllByPriceIsLessThan(double price);
 
     List<Course> findAllByAdvancementIs(String advancement);
+
 }

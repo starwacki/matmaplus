@@ -28,6 +28,6 @@ public class Course {
     private String advancement;
 
     @ManyToMany(mappedBy = "courses",fetch = FetchType.EAGER)
-    private Set<User> users = new HashSet<>();
+    private Set<UserEntity> userEntities = new HashSet<>();
 
 }

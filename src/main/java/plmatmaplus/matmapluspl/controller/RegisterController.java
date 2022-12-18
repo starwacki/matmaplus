@@ -6,6 +6,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import plmatmaplus.matmapluspl.dto.UserRegisterDTO;
+import plmatmaplus.matmapluspl.entity.Role;
+import plmatmaplus.matmapluspl.service.RoleService;
 import plmatmaplus.matmapluspl.service.UserRegisterService;
 
 @Controller
@@ -13,9 +15,13 @@ public class RegisterController {
 
     private UserRegisterService userRegisterService;
 
+    private RoleService roleService;
+
     @Autowired
-    public RegisterController(final UserRegisterService userService) {
+    public RegisterController(final UserRegisterService userService,
+                              final RoleService roleService) {
         this.userRegisterService = userService;
+        this.roleService = roleService;
     }
 
 
@@ -27,10 +33,11 @@ public class RegisterController {
             return "redirect:/matmaplus/register?emailTaken";
         } else if (!userRegisterService.isPasswordLengthProperty(userDto)) {
             return "redirect:/matmaplus/register?wrongPasswordLength";
-        } else if (userRegisterService.isPasswordSame(userDto)) {
+        } else if (!userRegisterService.isPasswordSame(userDto)) {
             return "redirect:/matmaplus/register?wrongPassword";
         }
-        userRegisterService.save(userDto);
+        Role userRole = roleService.getUserRole();
+        userRegisterService.save(userDto,userRole);
         return  "redirect:/matmaplus/register?success";
     }
 }

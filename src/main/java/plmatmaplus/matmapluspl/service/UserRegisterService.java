@@ -4,7 +4,8 @@ package plmatmaplus.matmapluspl.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import plmatmaplus.matmapluspl.dto.UserRegisterDTO;
-import plmatmaplus.matmapluspl.entity.User;
+import plmatmaplus.matmapluspl.entity.Role;
+import plmatmaplus.matmapluspl.entity.UserEntity;
 import plmatmaplus.matmapluspl.repository.UserRepository;
 
 @Service
@@ -16,8 +17,10 @@ public class UserRegisterService {
         this.userRepository = userRepository;
     }
 
-    public void save(UserRegisterDTO userRegisterDTO) {
-        userRepository.save(mapToUser(userRegisterDTO));
+    public void save(UserRegisterDTO userRegisterDTO, Role role) {
+        UserEntity userEntity = mapToUser(userRegisterDTO);
+        userEntity.addRolesToUser(role);
+        userRepository.save(userEntity);
     }
 
     public boolean isEmailTaken(UserRegisterDTO userRegisterDTO) {
@@ -36,7 +39,7 @@ public class UserRegisterService {
         return userRegisterDTO.getPassword().equals(userRegisterDTO.getRepeatedPassword());
     }
 
-    private User mapToUser(UserRegisterDTO userRegisterDTO) {
-        return new User(userRegisterDTO.getUsername(),userRegisterDTO.getPassword(),userRegisterDTO.getEmail());
+    private UserEntity mapToUser(UserRegisterDTO userRegisterDTO) {
+        return new UserEntity(userRegisterDTO.getUsername(),userRegisterDTO.getPassword(),userRegisterDTO.getEmail());
     }
 }

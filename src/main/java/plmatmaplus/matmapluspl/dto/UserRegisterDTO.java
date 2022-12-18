@@ -18,10 +18,8 @@ public class UserRegisterDTO {
     private String username;
     @NotEmpty
     private String password;
-
     @NotEmpty
     private String repeatedPassword;
-
     @NotEmpty
     private String email;
 

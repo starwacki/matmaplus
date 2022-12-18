@@ -27,36 +27,27 @@
             <a th:href="@{/matmaplus/blog}" class="nav-item nav-link">Blog</a>
             <a th:href="@{/matmaplus/contact}" class="nav-item nav-link">Contact</a>
         </div>
-		
-		<div class="navbar-nav ml-auto">
-			<div class="nav-item dropdown login-dropdown">
-				<a href="#" data-toggle="dropdown" class="nav-item nav-link dropdown-toggle"><i class="fa fa-user-o"></i> Zaloguj się</a>
-				<div class="dropdown-menu">					
-                    <form class="form-inline login-form" action="/examples/actions/confirmation.php" method="post">
-                        <div class="input-group">
-							<div class="input-group-prepend">
-								<span class="input-group-text">
-									<span class="fa fa-user"></span>
-								</span>                    
-							</div>
-                            <input type="text" class="form-control" placeholder="Username" required>
-                        </div>
-                        <div class="input-group">
-							<div class="input-group-prepend">
-								<span class="input-group-text">
-									<i class="fa fa-lock"></i>
-								</span>                    
-							</div>
-                            <input type="text" class="form-control" placeholder="Password" required>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Login</button>
-                    </form>
-                </div>
-            </div>		
-            <div id="navbarCollapse" class="collapse navbar-collapse justify-content-start">
-              <div class="navbar-nav">
-                  <a th:href="@{/matmaplus/register}" class="nav-item nav-link" >Zarejestruj się</a>
-                  </div>	
+
+        <div id="navbarLogin" class="collapse navbar-collapse justify-content-start" style="position: absolute; left:79%">
+            <div class="navbar-nav">
+                <a th:href="@{/matmaplus/login}" class="nav-item nav-link" >Zaloguj się</a>
+            </div>
+        </div>
+        <div id="navbarCollapse" class="collapse navbar-collapse justify-content-start" style="position: absolute; left:87%">
+            <div class="navbar-nav">
+                <a th:href="@{/matmaplus/register}" class="nav-item nav-link" >Zarejestruj się</a>
+            </div>
+        </div>
+        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-333" data-toggle="dropdown"
+           aria-haspopup="true" aria-expanded="false"  style="position: absolute; left:95%">
+            <i class="fa fa-user" aria-hidden="true"></i>
+        </a>
+        <div class="dropdown-menu dropdown-menu-right dropdown-default"
+             aria-labelledby="navbarDropdownMenuLink-333">
+            <a class="dropdown-item" href="#">Moje konto</a>
+            <a class="dropdown-item" href="#">Moje zamówienia</a>
+            <a class="dropdown-item" href="#">Wyloguj się</a>
+
         </div>
 	</div>
     </div>

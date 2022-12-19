@@ -6,7 +6,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import plmatmaplus.matmapluspl.dto.UserLoginDTO;
+import plmatmaplus.matmapluspl.entity.UserEntity;
 import plmatmaplus.matmapluspl.service.UserLoginService;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 @Controller
 public class LoginController {
@@ -18,10 +21,18 @@ public class LoginController {
         this.userLoginService = userLoginService;
     }
 
-    @PostMapping("/matmaplus/login")
-    public void login(@ModelAttribute("user")UserLoginDTO userLoginDTO) {
-
-
+    @PostMapping("/matmaplus/loginuser")
+    public String login(@ModelAttribute("user")UserLoginDTO userLoginDTO,  HttpServletRequest request) {
+        if (!userLoginService.isUserExist(userLoginDTO)) {
+            return "redirect:/matmaplus/login?usererror";
+        }
+        else if (!userLoginService.isPasswordProperty(userLoginDTO)) {
+            return "redirect:/matmaplus/login?usererror";
+        }
+        HttpSession session = request.getSession();
+        UserEntity user = userLoginService.getExistUser(userLoginDTO);
+        session.setAttribute("user", user);
+        return "redirect:/matmaplus/login?succes";
     }
 
 

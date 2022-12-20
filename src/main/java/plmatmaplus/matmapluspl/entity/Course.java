@@ -4,7 +4,9 @@ package plmatmaplus.matmapluspl.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -13,7 +15,6 @@ import java.util.Set;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
 public class Course {
 
     @Id
@@ -30,4 +31,18 @@ public class Course {
     @ManyToMany(mappedBy = "courses",fetch = FetchType.EAGER)
     private Set<UserEntity> userEntities = new HashSet<>();
 
+    @ManyToMany(mappedBy = "courses",fetch = FetchType.EAGER)
+    private Set<Cart> carts = new HashSet<>();
+
+
+
+    @Override
+    public String toString() {
+        return "Course{" +
+                "idCourses=" + idCourses +
+                ", name='" + name + '\'' +
+                ", price=" + price +
+                ", advancement='" + advancement + '\'' +
+                '}';
+    }
 }

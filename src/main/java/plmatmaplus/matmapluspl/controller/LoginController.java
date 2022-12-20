@@ -31,7 +31,7 @@ public class LoginController {
         }
         HttpSession session = request.getSession();
         UserEntity user = userLoginService.getExistUser(userLoginDTO);
-        session.setAttribute("user", user);
+        session.setAttribute("user", user.getIdUsers());
         return "redirect:/matmaplus/login?succes";
     }
 

@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 import plmatmaplus.matmapluspl.entity.Course;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface CourseRepository extends JpaRepository<Course,Long> {
@@ -13,5 +14,7 @@ public interface CourseRepository extends JpaRepository<Course,Long> {
     List<Course> findAllByPriceIsLessThan(double price);
 
     List<Course> findAllByAdvancementIs(String advancement);
+
+    Optional<Course> findByIdCourses(Long idCourses);
 
 }

@@ -1,16 +1,24 @@
 package plmatmaplus.matmapluspl.controller.templatescontroller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import plmatmaplus.matmapluspl.dto.UserLoginDTO;
 import plmatmaplus.matmapluspl.dto.UserRegisterDTO;
+import plmatmaplus.matmapluspl.service.CartService;
 
 import javax.servlet.http.HttpServletRequest;
 
 
 @Controller
 public class MainPageController {
+
+    private CartService cartService;
+    @Autowired
+    public MainPageController(CartService cartService) {
+        this.cartService = cartService;
+    }
 
     @RequestMapping("/matmaplus")
     public String mainView() {
@@ -23,7 +31,8 @@ public class MainPageController {
     }
 
     @RequestMapping("/matmaplus/shop")
-    public String sklep() {
+    public String shop(Model model,HttpServletRequest request) {
+        model.addAttribute("cartItems",cartService.getCartSize(request));
         return "shop.html";
     }
 

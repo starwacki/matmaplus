@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://thymeleaf.org">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -28,6 +30,7 @@
             <a th:href="@{/matmaplus/contact}" class="nav-item nav-link">Contact</a>
         </div>
 
+        <i  style="display: inline-block; position: absolute; left:75%" class="fa badge fa-lg" th:value="${cartItems}">&#xf290;</i>
         <div id="navbarLogin" class="collapse navbar-collapse justify-content-start" style="position: absolute; left:79%">
             <div class="navbar-nav">
                 <a th:href="@{/matmaplus/login}" class="nav-item nav-link" >Zaloguj się</a>

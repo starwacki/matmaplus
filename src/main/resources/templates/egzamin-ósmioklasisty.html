@@ -75,7 +75,13 @@
                                <i class="fa fa-star star"></i>
                             </div>
                             <div class="text-muted mb-3">Poziom podstawowy</div>
-                            <button type="button" class="btn bg-cart"><i class="fa fa-cart-plus mr-2"></i>Dodaj do koszyka</button>
+                            <form  th:action="@{/cart/addToCart}"
+                                   method="post">
+                                <button type="submit" class="btn bg-cart">
+                                    <input type="hidden" th:name="productId" th:value="${5}" />
+                                    <i class="fa fa-cart-plus mr-2"> </i> Dodaj do koszyka
+                                </button>
+                            </form>
                         </div>
                     </div>                             
 </div> 

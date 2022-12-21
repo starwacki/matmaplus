@@ -3,12 +3,16 @@ package plmatmaplus.matmapluspl.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PostMapping;
+import plmatmaplus.matmapluspl.controller.CourseCartDTO;
 import plmatmaplus.matmapluspl.entity.Cart;
 import plmatmaplus.matmapluspl.entity.Course;
 import plmatmaplus.matmapluspl.repository.CartRepository;
 import plmatmaplus.matmapluspl.repository.CourseRepository;
+import plmatmaplus.matmapluspl.repository.UserRepository;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class CartService {
@@ -36,6 +40,31 @@ public class CartService {
     public void addCourseToUserCart(Integer userId, Long courseId) {
         if (!isCartExist(userId)) createCartForUser(userId);
         if (!isCourseExist(userId,courseId)) addCourse(userId,courseId);
+    }
+
+    public List<CourseCartDTO> getCourseCartDTOList(HttpServletRequest request) {
+        if (request.getSession().getAttribute("user")==null) return new ArrayList<>();
+        else return mapToCourseCartDTOList(getCourses(request));
+    }
+
+    private List<Course> getCourses(HttpServletRequest request) {
+        return cartRepository.findByUserId(Integer.parseInt(request.getSession().getAttribute("user").toString())).get().getCourses().stream().toList();
+    }
+    private List<CourseCartDTO> mapToCourseCartDTOList(List<Course> courses) {
+
+        List<CourseCartDTO> courseCartDTOList = new ArrayList<>();
+        for (int i = 0; i < courses.size() ; i++) {
+            courseCartDTOList.add(mapToCourseCartDT(courses.get(i)));
+        }
+        return courseCartDTOList;
+    }
+
+    private CourseCartDTO mapToCourseCartDT(Course course) {
+        return new CourseCartDTO(course.getIdCourses(),
+                course.getName(),
+                course.getPrice(),
+                course.getAdvancement(),
+                "/resources/analiza-shop-roz.png");
     }
 
     private boolean isCourseExist(Integer userId, Long courseId) {

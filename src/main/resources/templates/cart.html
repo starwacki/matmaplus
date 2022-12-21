@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Bootstrap Navbar with Inline Login Form in Dropdown</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,600">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/resources/cartstyles.css">
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a href="#" class="navbar-brand">Matma<b>PLUS</b></a>
+  <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <!-- Collection of nav links, forms, and other content for toggling -->
+  <div id="navbarCollapse1" class="collapse navbar-collapse justify-content-start">
+    <div class="navbar-nav" >
+      <a th:href="@{/matmaplus}" class="nav-item nav-link" >Strona główna</a>
+      <a th:href="@{/user/courses}" class="nav-item nav-link">Moje kursy</a>
+      <a th:href="@{/matmaplus/shop}" class="nav-item nav-link ">Sklep</a>
+      <a th:href="@{/matmaplus/blog}" class="nav-item nav-link">Blog</a>
+      <a th:href="@{/matmaplus/contact}" class="nav-item nav-link">Contact</a>
+    </div>
+
+    <a th:href="@{/matmaplus/cart}" style="display: inline-block; position: absolute; left:75%; color: black" class="fa badge fa-lg" th:value="${cartItems}">&#xf290;</a>
+    <div id="navbarLogin" class="collapse navbar-collapse justify-content-start" style="position: absolute; left:79%">
+      <div class="navbar-nav">
+        <a th:href="@{/matmaplus/login}" class="nav-item nav-link" >Zaloguj się</a>
+      </div>
+    </div>
+    <div id="navbarCollapse" class="collapse navbar-collapse justify-content-start" style="position: absolute; left:87%">
+      <div class="navbar-nav">
+        <a th:href="@{/matmaplus/register}" class="nav-item nav-link" >Zarejestruj się</a>
+      </div>
+    </div>
+    <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-333" data-toggle="dropdown"
+       aria-haspopup="true" aria-expanded="false"  style="position: absolute; left:95%">
+      <i class="fa fa-user" aria-hidden="true"></i>
+    </a>
+    <div class="dropdown-menu dropdown-menu-right dropdown-default"
+         aria-labelledby="navbarDropdownMenuLink-333">
+      <a class="dropdown-item" href="#">Moje konto</a>
+      <a class="dropdown-item" href="#">Moje zamówienia</a>
+      <a class="dropdown-item" href="#">Wyloguj się</a>
+
+    </div>
+  </div>
+  </div>
+</nav>
+<main style="position: relative; top: 50px;">
+  <div class="container-fluid">
+    <div class="row">
+      <aside class="col-lg-9">
+        <div class="card">
+          <div class="table-responsive">
+            <table class="table table-borderless table-shopping-cart">
+              <thead class="text-muted">
+              <tr class="small text-uppercase" style="font-size: 20px; color: green;">
+                <th scope="col">Product</th>
+                <th scope="col" width="120">Ilość</th>
+                <th scope="col" width="120">Cena</th>
+                <th scope="col" class="text-right d-none d-md-block" width="200"></th>
+              </tr>
+              </thead>
+              <tbody th:each="course : ${courses}">
+              <div>
+              <tr style="border-bottom: 0.5px solid #DCDCDC; border-top: 0.5px solid #DCDCDC;">
+                <td>
+                  <figure class="itemside align-items-center">
+                    <div class="aside"><img th:src="${course.imgLink}" class="img-sm" style="height: 150px; width: 150px;"></div>
+                    <figcaption class="info"> <a href="#" class="title text-dark" data-abc="true" th:text="${course.name}"></a>
+                      <p class="text-muted small" th:text="${course.advancement}"> </p>
+                    </figcaption>
+                  </figure>
+                </td>
+                <td>
+                <label style="position: relative; right: -20px; top: 30px; font-size: 15px;"> 1 </label>
+                </td>
+                <td>
+                  <div class="price-wrap"> <var class="price" style="position: relative;  font-size: 15px; top: 30px; right: -5px;" th:text="${course.price} +  zł" ></var> </div>
+                </td>
+                <td class="text-right d-none d-md-block">  <a href="" class="btn btn-light" data-abc="true" style=" position:relative; top: 20px"> Usuń z listy</a> </td>
+              </tr>
+              </div>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </aside>
+      <aside class="col-lg-3">
+        <div class="card mb-3">
+          <div class="card-body">
+            <form>
+              <div class="form-group"> <label>Masz kupon rabatowy?</label>
+                <div class="input-group"> <input type="text" class="form-control coupon" name="" placeholder="Kod kuponu"> <span class="input-group-append"> <button class="btn btn-primary btn-apply coupon">Zastosuj</button> </span> </div>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-body">
+            <dl class="dlist-align">
+              <dt>Całkowita cena:</dt>
+              <dd class="text-right ml-3">$69.97</dd>
+            </dl>
+            <dl class="dlist-align">
+              <dt>Zniżka:</dt>
+              <dd class="text-right text-danger ml-3">- $10.00</dd>
+            </dl>
+            <dl class="dlist-align">
+              <dt>Ostateczna cena:</dt>
+              <dd class="text-right text-dark b ml-3"><strong>$59.97</strong></dd>
+            </dl>
+            <hr> <a href="#" class="btn btn-out btn-primary btn-square btn-main" data-abc="true"> Dokonaj zakupu </a> <a href="#" class="btn btn-out btn-success btn-square btn-main mt-2" data-abc="true">Kontynuuj zakupy</a>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  </div>
+</main>
+</body>
+</html>

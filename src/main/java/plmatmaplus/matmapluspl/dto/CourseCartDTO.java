@@ -1,4 +1,4 @@
-package plmatmaplus.matmapluspl.controller;
+package plmatmaplus.matmapluspl.dto;
 
 
 import lombok.AllArgsConstructor;

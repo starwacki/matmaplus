@@ -2,13 +2,13 @@ package plmatmaplus.matmapluspl.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PostMapping;
-import plmatmaplus.matmapluspl.controller.CourseCartDTO;
+import plmatmaplus.matmapluspl.dto.CourseCartDTO;
+import plmatmaplus.matmapluspl.dto.OrderDTO;
 import plmatmaplus.matmapluspl.entity.Cart;
 import plmatmaplus.matmapluspl.entity.Course;
 import plmatmaplus.matmapluspl.repository.CartRepository;
 import plmatmaplus.matmapluspl.repository.CourseRepository;
-import plmatmaplus.matmapluspl.repository.UserRepository;
+import plmatmaplus.matmapluspl.repository.PromoCodeRepository;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
@@ -21,10 +21,13 @@ public class CartService {
 
     private CourseRepository courseRepository;
 
+    private PromoCodeRepository promoCodeRepository;
+
     @Autowired
-    public CartService(CartRepository cartRepository,CourseRepository courseRepository) {
+    public CartService(CartRepository cartRepository,CourseRepository courseRepository,PromoCodeRepository promoCodeRepository) {
         this.cartRepository = cartRepository;
         this.courseRepository = courseRepository;
+        this.promoCodeRepository = promoCodeRepository;
     }
 
     public int getCartSize(HttpServletRequest httpServletRequest) {
@@ -38,17 +41,73 @@ public class CartService {
     }
 
     public void addCourseToUserCart(Integer userId, Long courseId) {
-        if (!isCartExist(userId)) createCartForUser(userId);
-        if (!isCourseExist(userId,courseId)) addCourse(userId,courseId);
+        if (!isCartExist(userId))
+            createCartForUser(userId);
+        if (!isCourseExist(userId,courseId))
+            addCourse(userId,courseId);
     }
 
     public List<CourseCartDTO> getCourseCartDTOList(HttpServletRequest request) {
-        if (request.getSession().getAttribute("user")==null) return new ArrayList<>();
-        else return mapToCourseCartDTOList(getCourses(request));
+        if (isNoActiveSession(request) || !isCartExist(request))
+            return getEmptyList();
+        else
+            return mapToCourseCartDTOList(getCourses(request));
+    }
+
+    public OrderDTO getOrder(List<CourseCartDTO> courseCartDTOList) {
+        return new OrderDTO(getCartTotal(courseCartDTOList),
+                false,
+                0,
+                getCartTotal(courseCartDTOList));
+    }
+
+    public OrderDTO getOrder(List<CourseCartDTO> courseCartDTOList,int code) {
+        double cartTotal = getCartTotal(courseCartDTOList);
+        return new OrderDTO(cartTotal,
+                true,
+                calculatePromoValue(cartTotal,code),
+                calculateEndCartTotal(cartTotal,calculatePromoValue(cartTotal,code)));
+    }
+
+    public boolean isPromoCodeExist(String promoCode) {
+        return promoCodeRepository.findPromoCodeByCode(promoCode).isPresent();
+    }
+
+    public Integer getPromoCode(String code) {
+        return promoCodeRepository.findPromoCodeByCode(code).get().getPercentValue();
+    }
+
+    private int calculatePromoValue(double cartTotal,int code) {
+        return (int) (cartTotal/100*code);
+    }
+
+    private double calculateEndCartTotal(double cartTotal, int promoValue) {
+        return cartTotal-promoValue;
+    }
+
+
+    private boolean isCartExist(HttpServletRequest request) {
+        return cartRepository.findByUserId(Integer.parseInt(
+                request.getSession().getAttribute("user").toString()
+        )).isPresent();
+    }
+
+    private double getCartTotal(List<CourseCartDTO> courseCartDTOList) {
+        double total = 0;
+        for (int i = 0; i < courseCartDTOList.size() ; i++) {
+            total+=courseCartDTOList.get(i).getPrice();
+        }
+        return total;
+    }
+
+
+    private ArrayList<CourseCartDTO> getEmptyList() {
+        return new ArrayList<>();
     }
 
     private List<Course> getCourses(HttpServletRequest request) {
-        return cartRepository.findByUserId(Integer.parseInt(request.getSession().getAttribute("user").toString())).get().getCourses().stream().toList();
+        return cartRepository.findByUserId(Integer.parseInt
+                (request.getSession().getAttribute("user").toString())).get().getCourses().stream().toList();
     }
     private List<CourseCartDTO> mapToCourseCartDTOList(List<Course> courses) {
 
@@ -66,6 +125,8 @@ public class CartService {
                 course.getAdvancement(),
                 "/resources/analiza-shop-roz.png");
     }
+
+
 
     private boolean isCourseExist(Integer userId, Long courseId) {
         return cartRepository.findByUserId(userId).get().getCourses().contains(courseRepository.getReferenceById(courseId));

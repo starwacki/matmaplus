@@ -3,6 +3,7 @@ package plmatmaplus.matmapluspl.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import plmatmaplus.matmapluspl.dto.CourseCartDTO;
+import plmatmaplus.matmapluspl.dto.CourseIMGLinks;
 import plmatmaplus.matmapluspl.dto.OrderDTO;
 import plmatmaplus.matmapluspl.entity.Cart;
 import plmatmaplus.matmapluspl.entity.Course;
@@ -107,7 +108,7 @@ public class CartService {
 
     private List<Course> getCourses(HttpServletRequest request) {
         return cartRepository.findByUserId(Integer.parseInt
-                (request.getSession().getAttribute("user").toString())).get().getCourses().stream().toList();
+                (request.getSession().getAttribute("user").toString())).get().getCourses();
     }
     private List<CourseCartDTO> mapToCourseCartDTOList(List<Course> courses) {
 
@@ -123,7 +124,7 @@ public class CartService {
                 course.getName(),
                 course.getPrice(),
                 course.getAdvancement(),
-                "/resources/analiza-shop-roz.png");
+                getImgLink(course.getIdCourses()));
     }
 
 
@@ -156,5 +157,18 @@ public class CartService {
         return cartRepository.findByUserId(Integer.parseInt(httpServletRequest.getSession().getAttribute("user").toString()))
                 .get()
                 .getCourses().size();
+    }
+
+    private String getImgLink(long courseId) {
+        String link = "";
+        switch ((int) courseId) {
+            case 1 -> link = CourseIMGLinks.ANALIZA_MATEMATYCZNA_PODSTAWA.toString();
+            case 2 -> link = CourseIMGLinks.ANALIZA_MATEMATYCZNA_ROZSZERZENIE.toString();
+            case 3 -> link = CourseIMGLinks.KURS_MATURA_PODSTAWOWA.toString();
+            case 4 -> link = CourseIMGLinks.KURS_MATURA_ROZSZERZONA.toString();
+            case 5 -> link = CourseIMGLinks.EGZAMIN_OŚMOKLASISTY.toString();
+            case 6 -> link = CourseIMGLinks.CAŁKI_NA_STUDIACH.toString();
+        }
+        return link;
     }
 }

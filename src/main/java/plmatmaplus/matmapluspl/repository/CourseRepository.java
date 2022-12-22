@@ -18,6 +18,5 @@ public interface CourseRepository extends JpaRepository<Course,Long> {
 
     Optional<Course> findByIdCourses(Long idCourses);
 
-    List<Course> findAllByUserEntities(UserEntity userEntity);
 
 }

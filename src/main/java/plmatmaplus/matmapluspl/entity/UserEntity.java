@@ -4,7 +4,9 @@ import lombok.*;
 import org.hibernate.annotations.Fetch;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -37,7 +39,7 @@ public class UserEntity {
             joinColumns = @JoinColumn(name = "users_idusers"),
             inverseJoinColumns = @JoinColumn(name =  "courses_idcourses")
     )
-    private Set<Course> courses = new HashSet<>();
+    private List<Course> courses = new ArrayList<>();
 
     @ManyToMany (
             fetch = FetchType.EAGER

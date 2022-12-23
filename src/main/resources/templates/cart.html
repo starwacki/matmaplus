@@ -87,7 +87,18 @@
                 <td>
                   <div class="price-wrap"> <var class="price" style="position: relative;  font-size: 15px; top: 30px; right: -5px;" th:text="${course.price} +  zł" ></var> </div>
                 </td>
-                <td class="text-right d-none d-md-block">  <a href="" class="btn btn-light" data-abc="true" style=" position:relative; top: 20px"> Usuń z listy</a> </td>
+                <td class="text-right d-none d-md-block">
+                  <form
+                  th:action="@{/matmaplus/cart/remove}"
+                  method="post">
+                    <button class="btn btn-light"
+                            type="submit"
+                            data-abc="true"
+                            style="
+                            position:relative; top: 20px"> Usuń z listy</button>
+                    <input type="hidden" th:value="${course.idCourses}" name="index" />
+                  </form>
+                </td>
               </tr>
               </div>
               </tbody>

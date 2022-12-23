@@ -18,11 +18,11 @@ import java.util.List;
 @Service
 public class CartService {
 
-    private CartRepository cartRepository;
+    private final CartRepository cartRepository;
 
-    private CourseRepository courseRepository;
+    private final CourseRepository courseRepository;
 
-    private PromoCodeRepository promoCodeRepository;
+    private final PromoCodeRepository promoCodeRepository;
 
     @Autowired
     public CartService(CartRepository cartRepository,CourseRepository courseRepository,PromoCodeRepository promoCodeRepository) {
@@ -41,11 +41,11 @@ public class CartService {
         return httpServletRequest.getSession().getAttribute("user") == null;
     }
 
-    public void addCourseToUserCart(Integer userId, Long courseId) {
-        if (!isCartExist(userId))
-            createCartForUser(userId);
-        if (!isCourseExist(userId,courseId))
-            addCourse(userId,courseId);
+    public void addCourseToUserCart(HttpServletRequest request, Long courseId) {
+        if (!isCartExist(getUserId(request)))
+            createCartForUser(getUserId(request));
+        if (!isCourseExist(getUserId(request),courseId))
+            addCourse(getUserId(request),courseId);
     }
 
     public List<CourseCartDTO> getCourseCartDTOList(HttpServletRequest request) {
@@ -55,14 +55,14 @@ public class CartService {
             return mapToCourseCartDTOList(getCourses(request));
     }
 
-    public OrderDTO getOrder(List<CourseCartDTO> courseCartDTOList) {
+    public OrderDTO getOrderWithPromoCode(List<CourseCartDTO> courseCartDTOList) {
         return new OrderDTO(getCartTotal(courseCartDTOList),
                 false,
                 0,
                 getCartTotal(courseCartDTOList));
     }
 
-    public OrderDTO getOrder(List<CourseCartDTO> courseCartDTOList,int code) {
+    public OrderDTO getOrderWithPromoCode(List<CourseCartDTO> courseCartDTOList, int code) {
         double cartTotal = getCartTotal(courseCartDTOList);
         return new OrderDTO(cartTotal,
                 true,
@@ -78,6 +78,12 @@ public class CartService {
         return promoCodeRepository.findPromoCodeByCode(code).get().getPercentValue();
     }
 
+    public void removeCourse(long index,HttpServletRequest request) {
+        Cart cart = cartRepository.findByUserId(getUserId(request)).get();
+        cart.getCourses().remove(courseRepository.findByIdCourses(index).get());
+        cartRepository.save(cart);
+    }
+
     private int calculatePromoValue(double cartTotal,int code) {
         return (int) (cartTotal/100*code);
     }
@@ -88,35 +94,26 @@ public class CartService {
 
 
     private boolean isCartExist(HttpServletRequest request) {
-        return cartRepository.findByUserId(Integer.parseInt(
-                request.getSession().getAttribute("user").toString()
-        )).isPresent();
+        return cartRepository.findByUserId(getUserId(request)).isPresent();
     }
 
     private double getCartTotal(List<CourseCartDTO> courseCartDTOList) {
         double total = 0;
-        for (int i = 0; i < courseCartDTOList.size() ; i++) {
-            total+=courseCartDTOList.get(i).getPrice();
+        for (CourseCartDTO courseCartDTO : courseCartDTOList) {
+            total += courseCartDTO.getPrice();
         }
         return total;
     }
-
 
     private ArrayList<CourseCartDTO> getEmptyList() {
         return new ArrayList<>();
     }
 
     private List<Course> getCourses(HttpServletRequest request) {
-        return cartRepository.findByUserId(Integer.parseInt
-                (request.getSession().getAttribute("user").toString())).get().getCourses();
+        return cartRepository.findByUserId(getUserId(request)).get().getCourses();
     }
     private List<CourseCartDTO> mapToCourseCartDTOList(List<Course> courses) {
-
-        List<CourseCartDTO> courseCartDTOList = new ArrayList<>();
-        for (int i = 0; i < courses.size() ; i++) {
-            courseCartDTOList.add(mapToCourseCartDT(courses.get(i)));
-        }
-        return courseCartDTOList;
+      return courses.stream().map(course -> mapToCourseCartDT(course)).toList();
     }
 
     private CourseCartDTO mapToCourseCartDT(Course course) {
@@ -148,13 +145,12 @@ public class CartService {
         cartRepository.save(cart);
     }
 
-    private boolean areCoursesInCart(HttpServletRequest httpServletRequest) {
-        httpServletRequest.getSession().getAttribute("user");
-       return cartRepository.findByUserId(Integer.parseInt(httpServletRequest.getSession().getAttribute("user").toString())).isPresent();
+    private boolean areCoursesInCart(HttpServletRequest request) {
+       return cartRepository.findByUserId(getUserId(request)).isPresent();
     }
 
-    private int getCoursesInCartSize(HttpServletRequest httpServletRequest) {
-        return cartRepository.findByUserId(Integer.parseInt(httpServletRequest.getSession().getAttribute("user").toString()))
+    private int getCoursesInCartSize(HttpServletRequest request) {
+        return cartRepository.findByUserId(getUserId(request))
                 .get()
                 .getCourses().size();
     }
@@ -170,5 +166,9 @@ public class CartService {
             case 6 -> link = CourseIMGLinks.CAŁKI_NA_STUDIACH.toString();
         }
         return link;
+    }
+
+    private int getUserId(HttpServletRequest request) {
+        return Integer.parseInt(request.getSession().getAttribute("user").toString());
     }
 }

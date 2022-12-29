@@ -26,20 +26,17 @@ public class CartController {
     @RequestMapping("/matmaplus/cart")
     public String cart(
                        Model model, HttpServletRequest request) {
-        List<CourseCartDTO> coursesInCart = cartService.getCourseCartDTOList(request);
-        OrderDTO orderDTO = cartService.getOrderWithPromoCode(coursesInCart);
-        addCartAttributes(coursesInCart,request,model,orderDTO);
-        return CART_VIEW;
+        if (cartService.isNoActiveSession(request))
+            return "redirect:/matmaplus/login?mustlogin";
+        else
+            return getUserCart(request,model);
     }
 
     @PostMapping("/matmaplus/cart/remove")
     public String removeFromCart(@RequestParam(name="index") long index,
                   Model model, HttpServletRequest request        ) {
         cartService.removeCourse(index,request);
-        List<CourseCartDTO> coursesInCart = cartService.getCourseCartDTOList(request);
-        OrderDTO orderDTO = cartService.getOrderWithPromoCode(coursesInCart);
-        addCartAttributes(coursesInCart,request,model,orderDTO);
-        return "redirect:/matmaplus/cart";
+        return getUserCart(request,model);
     }
 
     @PostMapping("/matmaplus/cart")
@@ -72,7 +69,7 @@ public class CartController {
         List<CourseCartDTO> coursesInCart = cartService.getCourseCartDTOList(request);
         OrderDTO orderDTO = cartService.getOrderWithPromoCode(coursesInCart);
         addCartAttributes(coursesInCart,request,model,orderDTO);
-        return CART_VIEW;
+        return "redirect:/matmaplus/cart?wrongCode";
     }
 
     private void addCartAttributes(List<CourseCartDTO> coursesInCart,HttpServletRequest request,
@@ -80,6 +77,13 @@ public class CartController {
         model.addAttribute("courses", coursesInCart);
         model.addAttribute("order",orderDTO);
         model.addAttribute("cartItems",cartService.getCartSize(request));
+    }
+
+    private String getUserCart(HttpServletRequest request, Model model) {
+        List<CourseCartDTO> coursesInCart = cartService.getCourseCartDTOList(request);
+        OrderDTO orderDTO = cartService.getOrderWithPromoCode(coursesInCart);
+        addCartAttributes(coursesInCart,request,model,orderDTO);
+        return CART_VIEW;
     }
 
 }

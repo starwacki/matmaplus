@@ -1,15 +1,10 @@
 package plmatmaplus.matmapluspl.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import plmatmaplus.matmapluspl.dto.UserLoginDTO;
 import plmatmaplus.matmapluspl.entity.UserEntity;
 import plmatmaplus.matmapluspl.repository.UserRepository;
-
-import java.util.Optional;
 
 @Service
 public class UserLoginService  {

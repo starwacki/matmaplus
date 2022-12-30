@@ -28,11 +28,17 @@ public class Course {
 
     private String advancement;
 
-    @ManyToMany(mappedBy = "courses",fetch = FetchType.EAGER)
+    @ManyToMany
+            (mappedBy = "courses",fetch = FetchType.EAGER)
     private Set<UserEntity> userEntities = new HashSet<>();
 
-    @ManyToMany(mappedBy = "courses",fetch = FetchType.EAGER)
+    @ManyToMany
+            (mappedBy = "courses", fetch = FetchType.EAGER)
     private Set<Cart> carts = new HashSet<>();
+
+    @OneToOne
+            (mappedBy = "course", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private CourseDetails details;
 
 
 

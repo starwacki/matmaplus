@@ -9,6 +9,7 @@ import plmatmaplus.matmapluspl.dto.UserRegisterDTO;
 import plmatmaplus.matmapluspl.service.CartService;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -50,12 +51,6 @@ public class MainPageController {
         return "contact.html";
     }
 
-    @RequestMapping("/user/courses")
-    public String userCourses(HttpServletRequest httpServletRequest) {
-        if (httpServletRequest.getSession().getAttribute("user")==null)
-            return "redirect:/matmaplus/login?mustlogin";
-        return "usercourses.html";
-    }
 
     @RequestMapping("/matmaplus/login")
     public String login(Model model) {

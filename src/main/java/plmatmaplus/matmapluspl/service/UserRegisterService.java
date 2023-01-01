@@ -1,7 +1,6 @@
 package plmatmaplus.matmapluspl.service;
-
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import plmatmaplus.matmapluspl.dto.UserRegisterDTO;
 import plmatmaplus.matmapluspl.entity.Role;
@@ -11,15 +10,22 @@ import plmatmaplus.matmapluspl.repository.UserRepository;
 @Service
 public class UserRegisterService {
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public UserRegisterService(UserRepository userRepository) {
+    public UserRegisterService(UserRepository userRepository,PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
-    public void save(UserRegisterDTO userRegisterDTO, Role role) {
+    public void registerUser(UserRegisterDTO userRegisterDTO) {
+        encodePassword(userRegisterDTO);
+        save(userRegisterDTO);
+    }
+
+    public void save(UserRegisterDTO userRegisterDTO) {
         UserEntity userEntity = mapToUser(userRegisterDTO);
-        userEntity.addRolesToUser(role);
+        userEntity.addRolesToUser(new Role("USER"));
         userRepository.save(userEntity);
     }
 
@@ -39,7 +45,14 @@ public class UserRegisterService {
         return userRegisterDTO.getPassword().equals(userRegisterDTO.getRepeatedPassword());
     }
 
+    public void encodePassword(UserRegisterDTO userRegisterDTO) {
+        userRegisterDTO.setPassword(passwordEncoder.encode(userRegisterDTO.getPassword()));
+    }
+
     private UserEntity mapToUser(UserRegisterDTO userRegisterDTO) {
-        return new UserEntity(userRegisterDTO.getUsername(),userRegisterDTO.getPassword(),userRegisterDTO.getEmail());
+        return new UserEntity(
+                userRegisterDTO.getUsername(),
+                userRegisterDTO.getPassword(),
+                userRegisterDTO.getEmail());
     }
 }

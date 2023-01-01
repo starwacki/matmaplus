@@ -4,13 +4,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import plmatmaplus.matmapluspl.service.CartService;
-
 import javax.servlet.http.HttpServletRequest;
 
 @Controller
 public class ShopProductsControllers {
 
-    private CartService cartService;
+    private final CartService cartService;
 
     @Autowired
     public ShopProductsControllers(CartService cartService) {
@@ -20,36 +19,36 @@ public class ShopProductsControllers {
     @RequestMapping("/matmaplus/shop/analizapodstawa")
     public String baseMathAnalysisPage(Model model, HttpServletRequest request) {
         model.addAttribute("cartItems",cartService.getCartSize(request));
-        return "analiza-matematyczna.html";
+        return Views.ANALIZA_MATEMATYCZNA_PODST_VIEW.toString();
     }
 
     @RequestMapping("/matmaplus/shop/analizarozszerzona")
     public String extendedMathAnalysisPage(Model model,HttpServletRequest request) {
         model.addAttribute("cartItems",cartService.getCartSize(request));
-        return "analiza-matematyczna-roz.html";
+        return Views.ANALIZA_MATEMATYCZNA_ROZ_VIEW.toString();
     }
 
     @RequestMapping("/matmaplus/shop/maturapodstawowa")
     public String baseExamPage(Model model,HttpServletRequest request) {
         model.addAttribute("cartItems",cartService.getCartSize(request));
-        return "kurs-matura-podstawowa.html";
+        return Views.KURS_MATURA_PODST_VIEW.toString();
     }
 
     @RequestMapping("/matmaplus/shop/maturarozszerzona")
     public String extendedExamPage(Model model,HttpServletRequest request) {
         model.addAttribute("cartItems",cartService.getCartSize(request));
-        return "kurs-matura-rozszerzona.html";
+        return Views.KURS_MATURA_ROZ_VIEW.toString();
     }
 
 
     @RequestMapping("/matmaplus/shop/egzamin-ósmioklasisty")
     public String primarySchoolExamPage(Model model,HttpServletRequest request) {
         model.addAttribute("cartItems",cartService.getCartSize(request));
-        return "egzamin-ósmioklasisty.html";
+        return Views.EGZAMIN_ÓSMOKLASISTY_VIEW.toString();
     }
 
     @RequestMapping("/matmaplus/shop/całki")
     public String integralsPage() {
-        return "całki-na-studiach.html";
+        return Views.CAŁKI_NA_STUDIACH_VIEW.toString();
     }
 }

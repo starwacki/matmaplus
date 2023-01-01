@@ -20,11 +20,24 @@ public class UserLoginService  {
         return userRepository.findUserByUsername(userLoginDTO.getUsername()).isPresent();
     }
 
-    public boolean isPasswordProperty(UserLoginDTO userLoginDTO) {
+    public boolean isUserLoginAndPasswordProperty(UserLoginDTO userLoginDTO) {
+        return isPasswordProperty(userLoginDTO) &&
+                isLoginProperty(userLoginDTO);
+    }
+
+    public long getLoginUserId(UserLoginDTO userLoginDTO) {
+        return getExistUser(userLoginDTO).getIdUsers();
+    }
+
+    private boolean isLoginProperty(UserLoginDTO userLoginDTO) {
+        return userRepository.findUserByUsername(userLoginDTO.getUsername()).get().getUsername().equals(userLoginDTO.getUsername());
+    }
+
+    private boolean isPasswordProperty(UserLoginDTO userLoginDTO) {
         return userRepository.findUserByUsername(userLoginDTO.getUsername()).get().getPassword().equals(userLoginDTO.getPassword());
     }
 
-    public UserEntity getExistUser(UserLoginDTO userLoginDTO) {
+    private UserEntity getExistUser(UserLoginDTO userLoginDTO) {
         return userRepository.findUserByUsername(userLoginDTO.getUsername()).get();
     }
 }

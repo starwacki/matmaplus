@@ -58,26 +58,30 @@
 </nav>
 
 <main>
-
-	<div class="container mt-5">
-	<div class="row">
+	<div class="container mt-5" style="text-align: center;">
+	<div class="row" style="justify-content: center;">
 		<div th:each = " course : ${courses}" style="margin-top: 30px;">
 		<div class="col-md-4" >
-			<div class="card p-3" style="width: 400px; background-color: #F8F8FF;" >
-				<div class="d-flex flex-row mb-3"><img th:src = "${course.imgLink}" style="width: 100px; height: 100px;">
+			<div class="card p-3" style="width: 450px; background-color: #F8F8FF;" >
+				<div class="d-flex flex-row mb-3"><img th:src = "${course.imgLink}" style="width: 125px; height: 125px;">
 					<div class="d-flex flex-column ml-2"><span th:text = "${course.name}"></span>
-						<span class="text-black-50" th:text = "${course.advancement}"></span>
+						<span class="text-black-50" th:text = "${course.advancement}" style="text-align: left;"></span>
 					</div>
 				</div>
 				<div class="d-flex justify-content-between install mt-3">
 					<span>Ukończono: <span> 10</span> <span> / </span> <span th:text="${course.lessons}"></span></span>
 					<span class="text-primary">Przejdź do kursu&nbsp;<i class="fa fa-angle-right"></i> <i class="fa fa-angle-right"></i></span></div>
-				<p style="margin-top: 5px;">Video w kursie: <span th:text="${course.courseVideosTime}" ></span> h <i class="fa fa-video-camera" aria-hidden="true"></i>
+				<p style="margin-top: 5px; text-align: left">Video w kursie: <span th:text="${course.courseVideosTime}" ></span> h <i class="fa fa-video-camera" aria-hidden="true"></i>
 				</p>
 			</div>
 		</div>
 	   </div>
-
+		<div th:if="${courses.isEmpty()}">
+			<div class="card p-3" style="width: 600px; height: 200px; background-color: #F8F8FF;" >
+				<h2> Nie masz  dostępu do żadnego kursu! </h2>
+				<a th:href="@{/matmaplus/shop}" class="nav-item nav-link" style="color: green; font-size: 30px;">Przejdź do sklepu >>></a>
+				</div>
+		</div>
 	</div>
 	</div>
 </main>

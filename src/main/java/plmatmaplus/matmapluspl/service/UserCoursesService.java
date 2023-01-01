@@ -23,6 +23,10 @@ public class UserCoursesService {
         this.userRepository = userRepository;
     }
 
+    public boolean isSessionExist(HttpServletRequest request) {
+        return request.getSession().getAttribute("user")==null;
+    }
+
     public List<UserCoursesDTO> mapToUserCoursesDTOList(HttpServletRequest request) {
      return getUserCourses(getUserId(request))
              .stream()
@@ -43,4 +47,6 @@ public class UserCoursesService {
     private Long getUserId(HttpServletRequest request) {
         return Long.parseLong(request.getSession().getAttribute("user").toString());
     }
+
+
 }

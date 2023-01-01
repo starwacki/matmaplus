@@ -39,12 +39,6 @@ public class MainPageController {
         return "shop.html";
     }
 
-    @RequestMapping("/matmaplus/register")
-    public String register(Model model) {
-        UserRegisterDTO user = new UserRegisterDTO();
-        model.addAttribute("userRegisterDTO", user);
-        return "register.html";
-    }
 
     @RequestMapping("/matmaplus/contact")
     public String contact() {

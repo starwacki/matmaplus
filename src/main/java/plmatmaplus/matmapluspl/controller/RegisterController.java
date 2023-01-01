@@ -3,41 +3,48 @@ package plmatmaplus.matmapluspl.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import plmatmaplus.matmapluspl.dto.UserRegisterDTO;
-import plmatmaplus.matmapluspl.entity.Role;
-import plmatmaplus.matmapluspl.service.RoleService;
 import plmatmaplus.matmapluspl.service.UserRegisterService;
 
 @Controller
 public class RegisterController {
 
-    private UserRegisterService userRegisterService;
-
-    private RoleService roleService;
+    private final UserRegisterService userRegisterService;
 
     @Autowired
-    public RegisterController(final UserRegisterService userService,
-                              final RoleService roleService) {
+    public RegisterController( UserRegisterService userService) {
         this.userRegisterService = userService;
-        this.roleService = roleService;
+    }
+
+    @RequestMapping("/matmaplus/register")
+    public String register(Model model) {
+        UserRegisterDTO user = new UserRegisterDTO();
+        model.addAttribute("userRegisterDTO", user);
+        return Views.REGISTER_VIEW.toString();
     }
 
 
     @PostMapping("matmaplus/register/save")
     public String registration(@ModelAttribute("user") UserRegisterDTO userDto){
         if (userRegisterService.isUserExist(userDto)) {
-            return "redirect:/matmaplus/register?userExist";
+            return RedirectViews.WRONG_USERNAME_REGISTER_VIEW.toString();
         } else if (userRegisterService.isEmailTaken(userDto)) {
-            return "redirect:/matmaplus/register?emailTaken";
+            return RedirectViews.WRONG_EMAIL_REGISTER_VIEW.toString();
         } else if (!userRegisterService.isPasswordLengthProperty(userDto)) {
-            return "redirect:/matmaplus/register?wrongPasswordLength";
+            return RedirectViews.WRONG_PASSWORD_LENGTH_REGISTER_VIEW.toString();
         } else if (!userRegisterService.isPasswordSame(userDto)) {
-            return "redirect:/matmaplus/register?wrongPassword";
+            return RedirectViews.WRONG_PASSWORD_REGISTER_VIEW.toString();
+        } else {
+            userRegisterService.registerUser(userDto);
+            return  RedirectViews.SUCCESS_REGISTER_VIEW.toString();
         }
-        Role userRole = roleService.getUserRole();
-        userRegisterService.save(userDto,userRole);
-        return  "redirect:/matmaplus/register?success";
     }
-}
+
+    }
+
+
+

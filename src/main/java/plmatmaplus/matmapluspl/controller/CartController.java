@@ -13,9 +13,6 @@ import java.util.List;
 
 @Controller
 public class CartController {
-
-    private static final String CART_VIEW = "cart.html";
-
     private CartService cartService;
 
     @Autowired
@@ -27,7 +24,7 @@ public class CartController {
     public String cart(
                        Model model, HttpServletRequest request) {
         if (cartService.isNoActiveSession(request))
-            return "redirect:/matmaplus/login?mustlogin";
+            return RedirectViews.USER_MUST_LOGIN_VIEW.toString();
         else
             return getUserCart(request,model);
     }
@@ -35,7 +32,7 @@ public class CartController {
     @PostMapping("/matmaplus/cart/remove")
     public String removeFromCart(@RequestParam(name="index") long index,
                   Model model, HttpServletRequest request        ) {
-        cartService.removeCourse(index,request);
+        cartService.removeCourseFromCart(index,request);
         return getUserCart(request,model);
     }
 
@@ -52,24 +49,24 @@ public class CartController {
     @PostMapping("/cart/addToCart")
     public String addCourseToCart(@RequestParam("productId")Long productId, HttpServletRequest request) {
         if (cartService.isNoActiveSession(request))
-            return "redirect:/matmaplus/login?mustlogin";
+            return RedirectViews.USER_MUST_LOGIN_VIEW.toString();
         else
             cartService.addCourseToUserCart(request,productId);
-        return "redirect:/matmaplus/shop";
+        return RedirectViews.SHOP_VIEW.toString();
     }
 
     private String cartWithPromoCode( HttpServletRequest request,String code,Model model) {
         List<CourseCartDTO> coursesInCart = cartService.getCourseCartDTOList(request);
         OrderDTO orderDTO = cartService.getOrderWithPromoCode(coursesInCart,cartService.getPromoCode(code));
         addCartAttributes(coursesInCart,request,model,orderDTO);
-        return CART_VIEW;
+        return Views.CART_VIEW.toString();
     }
 
     private String cartWithWrongPromoCode(HttpServletRequest request,Model model) {
         List<CourseCartDTO> coursesInCart = cartService.getCourseCartDTOList(request);
         OrderDTO orderDTO = cartService.getOrderWithPromoCode(coursesInCart);
         addCartAttributes(coursesInCart,request,model,orderDTO);
-        return "redirect:/matmaplus/cart?wrongCode";
+        return RedirectViews.WRONG_PROMO_CODE_CART_VIEW.toString();
     }
 
     private void addCartAttributes(List<CourseCartDTO> coursesInCart,HttpServletRequest request,
@@ -83,7 +80,6 @@ public class CartController {
         List<CourseCartDTO> coursesInCart = cartService.getCourseCartDTOList(request);
         OrderDTO orderDTO = cartService.getOrderWithPromoCode(coursesInCart);
         addCartAttributes(coursesInCart,request,model,orderDTO);
-        return CART_VIEW;
+        return Views.CART_VIEW.toString();
     }
-
 }

@@ -16,6 +16,12 @@ public class ShopProductsControllers {
         this.cartService = cartService;
     }
 
+    @RequestMapping("/matmaplus/shop")
+    public String shop(Model model,HttpServletRequest request) {
+        model.addAttribute("cartItems",cartService.getCartSize(request));
+        return "shop.html";
+    }
+
     @RequestMapping("/matmaplus/shop/analizapodstawa")
     public String baseMathAnalysisPage(Model model, HttpServletRequest request) {
         model.addAttribute("cartItems",cartService.getCartSize(request));

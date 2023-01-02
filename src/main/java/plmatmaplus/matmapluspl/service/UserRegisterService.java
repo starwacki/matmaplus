@@ -3,7 +3,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import plmatmaplus.matmapluspl.dto.UserRegisterDTO;
-import plmatmaplus.matmapluspl.entity.Role;
 import plmatmaplus.matmapluspl.entity.UserEntity;
 import plmatmaplus.matmapluspl.repository.UserRepository;
 
@@ -25,7 +24,6 @@ public class UserRegisterService {
 
     public void save(UserRegisterDTO userRegisterDTO) {
         UserEntity userEntity = mapToUser(userRegisterDTO);
-        userEntity.addRolesToUser(new Role("USER"));
         userRepository.save(userEntity);
     }
 

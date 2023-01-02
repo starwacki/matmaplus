@@ -18,7 +18,7 @@
   });
   </script>
 </head>
-<body>
+<body style="background-image: url('/resources/tło.png');">
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <a href="#" class="navbar-brand">Matma<b>PLUS</b></a>
   <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
@@ -52,7 +52,7 @@
          aria-labelledby="navbarDropdownMenuLink-333">
       <a class="dropdown-item" href="#">Moje konto</a>
       <a class="dropdown-item" href="#">Moje zamówienia</a>
-      <a class="dropdown-item" href="#">Wyloguj się</a>
+      <a class="dropdown-item" th:href="@{/matmaplus/logout}" >Wyloguj się</a>
 
     </div>
 
@@ -80,21 +80,10 @@
       </div>
     </div>
   </div>
-
-
-
-
   <section class="vh-100">
     <div class="container-fluid h-custom">
       <div class="row d-flex justify-content-center align-items-center h-100">
-        <div class="col-md-9 col-lg-6 col-xl-5">
-          <img
-                  src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp"
-                  class="img-fluid"
-                  alt="Sample image"
-          >
-        </div>
-        <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1" style="position: relative; top: 50px; display: inline-block;">
+        <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1" style="position: relative; top: 50px; display: inline-block; background-color: #F5F5F5">
           <form
                   method="post"
                   role="form"
@@ -108,13 +97,11 @@
                       id="username"
                       name="username"
                       th:field="*{username}"
-                      placeholder="login"
+                      placeholder="username"
                      class="form-control form-control-lg"
                       />
-              <label class="form-label" for="username">Email address</label>
+              <label class="form-label" for="username">Username</label>
             </div>
-
-            <!-- Password input -->
             <div class="form-outline mb-3">
               <input  type="text"
                       id="password"
@@ -138,7 +125,7 @@
             <div class="text-center text-lg-start mt-4 pt-2">
               <button type="submit" class="btn btn-primary btn-lg"
                       style="padding-left: 2.5rem; padding-right: 2.5rem;">Login</button>
-              <p class="small fw-bold mt-2 pt-1 mb-0">Don't have an account? <a href="#!"
+              <p class="small fw-bold mt-2 pt-1 mb-0">Don't have an account? <a th:href="@{/matmaplus/register}"
                                                                                 class="link-danger">Register</a></p>
               <p  th:if="${param.usererror}" style=" color: red; font-size: 15px; position: absolute; left: 150px;">Niepoprawny login lub hasło!</p>
               <p  th:if="${param.succes}" style=" color: green; font-size: 15px; position: absolute; left: 165px;">Zostałeś zalogowany</p>

@@ -453,6 +453,121 @@ ul {
 }
 
 
+.height-100 {
+    height: 100vh;
+}
+
+.ratings{
+    margin-right:10px;
+}
+
+.ratings i{
+
+    color:#cecece;
+    font-size:32px;
+}
+
+.rating-color{
+    color:#fbc634 !important;
+}
+
+.review-count{
+    font-weight:400;
+    margin-bottom:2px;
+    font-size:24px !important;
+}
+
+.small-ratings i{
+    color:#cecece;
+}
+
+.review-stat{
+    font-weight:300;
+    font-size:18px;
+    margin-bottom:2px;
+}
+
+.form-color {
+    background-color: #fafafa
+}
+
+.form-control {
+    height: 48px;
+    border-radius: 25px
+}
+
+.form-control:focus {
+    color: #495057;
+    background-color: #fff;
+    border-color: #35b69f;
+    outline: 0;
+    box-shadow: none;
+    text-indent: 10px
+}
+
+.c-badge {
+    background-color: #35b69f;
+    color: white;
+    height: 20px;
+    font-size: 11px;
+    width: 92px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2px
+}
+
+.comment-text {
+    font-size: 13px
+}
+
+.wish {
+    color: #35b69f
+}
+
+.user-feed {
+    font-size: 14px;
+    margin-top: 12px
+}
+
+.rating > [id^="star"] { display: none; }
+.rating > label:before {
+    margin: 5px;
+    font-size: 2.25em;
+    font-family: FontAwesome;
+    display: inline-block;
+    content: "\f005";
+}
+
+.rating > .half:before {
+    content: "\f089";
+    position: absolute;
+}
+
+.rating > label {
+    color: #ddd;
+    float: right;
+}
+
+/***** CSS Magic to Highlight Stars on Hover *****/
+
+.rating > [id^="star"]:checked ~ label, /* show gold star when clicked */
+.rating:not(:checked) > label:hover, /* hover current star */
+.rating:not(:checked) > label:hover ~ label { color: #FFD700;  } /* hover previous stars in list */
+
+.rating > [id^="star"]:checked + label:hover, /* hover current star when changing rating */
+.rating > [id^="star"]:checked ~ label:hover,
+.rating > label:hover ~ [id^="star"]:checked ~ label, /* lighten current selection */
+.rating > [id^="star"]:checked ~ label:hover ~ label { color: #FFED85;  }
+
+.reset-option {
+    display: none;
+}
+
+
+
+
 
 
  

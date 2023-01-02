@@ -36,7 +36,7 @@ public class LoginController {
         } catch (ServletException e) {
             throw new RuntimeException(e);
         }
-        return "mainview.html";
+        return "redirect:/matmaplus/login?logout";
     }
 
     @PostMapping("/matmaplus/loginuser")

@@ -4,9 +4,7 @@ package plmatmaplus.matmapluspl.entity;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -39,6 +37,10 @@ public class Course {
     @OneToOne
             (mappedBy = "course", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private CourseDetails details;
+
+    @OneToMany
+            (mappedBy = "course",cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<Comment> comments =  new HashSet<>();
 
 
 

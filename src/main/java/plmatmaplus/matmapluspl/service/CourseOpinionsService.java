@@ -23,6 +23,7 @@ public class CourseOpinionsService {
     public CourseOpinionSectionDTO getCourseOpinionSectionDTO (long courseId) {
         CourseOpinionSectionDTO courseOpinionSectionDTO = createCourseOpinionSectionDTO(courseId);
         setAverageAndAllOpinions(courseOpinionSectionDTO);
+        setCourseStars(courseOpinionSectionDTO);
         return courseOpinionSectionDTO;
     }
 
@@ -49,6 +50,19 @@ public class CourseOpinionsService {
         return stars != 0;
     }
 
+
+    private int getFullCourseStars(double average) {
+        return (int) (average);
+    }
+
+    private int getFractionOfStarsInPercent(double average) {
+          return (int) ((average-getFullCourseStars(average))*100);
+    }
+
+    private int getEmptyStars(double average) {
+        return (int) (5-average);
+    }
+
     private CourseOpinionSectionDTO createCourseOpinionSectionDTO(long courseId) {
         return new CourseOpinionSectionDTO(
                 getStarsOpinions(courseId,5),
@@ -71,6 +85,13 @@ public class CourseOpinionsService {
                 courseOpinionSectionDTO.getThreeStarsOpinions() +
                 courseOpinionSectionDTO.getFourStarsOpinions() +
                 courseOpinionSectionDTO.getFiveStarsOpinions();
+    }
+
+    private void setCourseStars(CourseOpinionSectionDTO courseOpinionSectionDTO) {
+        double average = getAverage(courseOpinionSectionDTO);
+        courseOpinionSectionDTO.setFullStars(getFullCourseStars(average));
+        courseOpinionSectionDTO.setEmptyStars(getEmptyStars(average));
+        courseOpinionSectionDTO.setFractionStarWidth(getFractionOfStarsInPercent(average));
     }
 
     private double getAverageStarsOpinions(CourseOpinionSectionDTO courseOpinionSectionDTO) {

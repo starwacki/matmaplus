@@ -54,62 +54,215 @@
 	</div>
     </div>
 </nav>
-<div class="col-md-4 mt-2">
-    <div class="card"  style="position: fixed; top: 75px; left: 150px; width: 600px; height: 600px;">
-                        <div class="card-body" >
-                            <div class="card-img-actions">   
-                                    <img src="/resources/matura-podstaw.png" class="card-img img-fluid" width="96" height="350" alt="">
+<div class="div-container">
+    <div class="card" style="position: relative; top: 75px; left: 150px; width: 600px; height: 600px;">
+        <div class="card-body">
+            <div class="card-img-actions">
+                <img src="/resources/matura-podstaw.png" class="card-img img-fluid" width="96" height="350" alt="">
+            </div>
+        </div>
+        <div class="card-body bg-light text-center">
+            <div class="mb-2">
+                <h6 class="font-weight-semibold mb-2">
+                    <p>Kurs matura podstawowa</p>
+                </h6>
+            </div>
+            <h3 class="mb-0 font-weight-semibold">150.00 zł</h3>
+            <div>
+                <i class="fa fa-star star"></i>
+                <i class="fa fa-star star"></i>
+                <i class="fa fa-star star"></i>
+            </div>
+
+            <div class="text-muted mb-3">Poziom podstawowy</div>
+
+            <form  th:action="@{/cart/addToCart}"
+                   method="post">
+                <button type="submit" class="btn bg-cart">
+                    <input type="hidden" th:name="productId" th:value="${3}" />
+                    <i class="fa fa-cart-plus mr-2"> </i> Dodaj do koszyka
+                </button>
+            </form>
+        </div>
+    </div>
+    <div style="position: relative; top: 75px; left: 165px; width: 500px; height: 500px;">
+        <h2>KURS MATURA <h5> (podstawowa) </h5> </h2>
+        <hr style="border-width: 3px;">
+        <div>
+            <p>Kurs matury podstawowej zawiera wszystkie niezbędne zagadnienia przygotowujące uczestnika do matury
+                w zakresie podstawowym. Dlaczego warto wybrać nasz kurs? Matura podstawowa to w większości schematyczne,
+                powtarzające się zadania - z nami nauczysz się je rozwiązywać!
+            </p>
+            <p>W kursie znajdziesz następujące zagadnienia:</p>
+            <ul >
+                <li>Algebra ( wszystkie możliwe równania)</li>
+                <li>Funkcje elementarne</li>
+                <li>Ciągi</li>
+                <li>Trygonometria</li>
+                <li>Planimetria</li>
+                <li>Geometria analityczna</li>
+                <li>Stereometria</li>
+                <li>Prawdopodobieństwo i kombinatoryka</li>
+
+            </ul>
+            <p></p>
+            <p>Dodatkowo: Do kursu dodajemy dodatkowe zestawy zadań wraz z rozwiązaniami i omówieniem - według nas nauka
+                poprzez praktykę jest najlepsza!
+            </p>
+        </div>
+    </div>
+</div>
+
+
+<div style="position: relative; top: 90px; left: 150px; width: 1150px; border: 0.3px solid darkgrey; ">
+    <div class="height-100 container " style="width: 1130px;"  >
+        <div class="card p-3" style="position: relative; width: 1130px; left: -20px; border: none">
+            <div class="d-flex justify-content-between align-items-center">
+                <div class="ratings" th:if="${opinion.allOpinions != 0 }" >
+                    <h4> Średnia Ocena kursu: <span th:text="${opinion.averageStarsOpinions}"></span> / 5  <span style="position: relative; left: 630px;"> Ilość ocen:
+                        ( <span  th:text="${opinion.allOpinions}"></span> ) </span></h4>
+                    <div style="display: flex">
+                        <div style="position: relative; display: inline-block">
+                            <span  class="fa fa-star rating-color" style="font-size: 35px;" th:each="i: ${#numbers.sequence(0,opinion.fullStars-1)}"></span>
+                        </div>
+                        <div class="containerStars" th:if="${opinion.fractionStarWidth != 0}">
+                            <span class="star star-under fa fa-star"></span>
+                            <span class="star star-over fa fa-star"  th:style="'width: ' + ${opinion.fractionStarWidth} + '%;'"></span>
+                        </div>
+                        <div style="position: relative; display: inline-block">
+                            <span class="star star-under fa fa-star" style="font-size: 35px;" th:each="i: ${#numbers.sequence(0,opinion.emptyStars-1)}"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="ratings" th:if="${opinion.allOpinions == 0 }" >
+                    <h4>Kurs nie ma jeszcze opinii - bądź pierwszy!</h4>
+                    <div style="display: flex">
+                        <div style="position: relative; display: inline-block">
+                            <span  class="fa fa-star rating-color" style="font-size: 35px;" ></span>
+                            <span  class="fa fa-star rating-color" style="font-size: 35px;" ></span>
+                            <span  class="fa fa-star rating-color" style="font-size: 35px;" ></span>
+                            <span  class="fa fa-star rating-color" style="font-size: 35px;" ></span>
+                            <span  class="fa fa-star rating-color" style="font-size: 35px;" ></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="mt-5 d-flex justify-content-between align-items-center" >
+            <h3 class="review-stat">Rewelacyjny: <span> ( <span th:text = "${opinion.fiveStarsOpinions}"></span> ) </span></h3>
+            <div class="small-ratings">
+                <i class="fa fa-star rating-color"></i>
+                <i class="fa fa-star rating-color"></i>
+                <i class="fa fa-star rating-color"></i>
+                <i class="fa fa-star rating-color"></i>
+                <i class="fa fa-star rating-color"></i>
+            </div>
+
+        </div>
+
+        <div class="mt-1 d-flex justify-content-between align-items-center">
+            <h3 class="review-stat">Dobry: <span> ( <span th:text = "${opinion.fourStarsOpinions}"></span> ) </span></h3>
+            <div class="small-ratings">
+                <i class="fa fa-star rating-color"></i>
+                <i class="fa fa-star rating-color"></i>
+                <i class="fa fa-star rating-color"></i>
+                <i class="fa fa-star rating-color"></i>
+                <i class="fa fa-star"></i>
+            </div>
+        </div>
+
+        <div class="mt-1 d-flex justify-content-between align-items-center">
+            <h3 class="review-stat">Średni: <span> ( <span th:text = "${opinion.threeStarsOpinions}"></span> ) </span></h3>
+            <div class="small-ratings">
+                <i class="fa fa-star rating-color"></i>
+                <i class="fa fa-star rating-color"></i>
+                <i class="fa fa-star rating-color"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+            </div>
+        </div>
+
+
+        <div class="mt-1 d-flex justify-content-between align-items-center">
+            <h3 class="review-stat">Niezadowalający: <span> ( <span th:text = "${opinion.twoStarsOpinions}"></span> ) </span></h3>
+            <div class="small-ratings">
+                <i class="fa fa-star rating-color"></i>
+                <i class="fa fa-star rating-color"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+            </div>
+        </div>
+
+
+        <div class="mt-1 d-flex justify-content-between align-items-center">
+            <h3 class="review-stat">Słaby <span> ( <span th:text = "${opinion.oneStarsOpinions}"></span> ) </span></h3>
+            <div class="small-ratings">
+                <i class="fa fa-star rating-color"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+            </div>
+        </div>
+        <div>
+            <div class="container mt-5 mb-5" style="width: 1130px;">
+                <div style="width: 1130px; position: relative; left: -45px; ">
+                    <div class="col-md-7">
+                        <div class="card" style="width: 1130px; border: none;">
+                            <div style="display: inline-block;">
+                                <form
+                                        method="post"
+                                        role="form"
+                                        th:action="@{/matmaplus/comment}"
+                                >
+                                    <div style="position: relative; right: 900px; top: 30px;">
+                                        <fieldset class="rating">
+                                            <input type="radio" id="star5" name="rating" th:value="5" /><label class = "full" for="star5" title="Rewelacyjny - 5 gwiazdek"></label>
+                                            <input type="radio" id="star4" name="rating" th:value="4" /><label class = "full" for="star4" title="Dobry - 4 gwiazdki"></label>
+                                            <input type="radio" id="star3" name="rating" th:value="3" /><label class = "full" for="star3" title="Średni - 3 gwiazdki"></label>
+                                            <input type="radio" id="star2" name="rating" th:value="2" /><label class = "full" for="star2" title="Niezadowalający - 2 gwiazdki"></label>
+                                            <input type="radio" id="star1" name="rating" th:value="1" /><label class = "full" for="star1" title="Słaby - 1 gwiadka"></label>
+                                            <input type="radio" class="reset-option" name="rating" value="reset" />
+                                        </fieldset>
+                                    </div>
+                                    <div class="mt-3 d-flex flex-row align-items-center p-3 form-color" style="background-color: white">
+                                        <input type="text" class="form-control" placeholder="Enter your comment..."  >
+                                        <button type="submit"  style="border: none; background-color: white">
+                                            <i class="fa fa-paper-plane" aria-hidden="true"></i></button>
+                                    </div>
+                                    <input type="hidden" th:name="courseId" th:value="${1}" />
+                                </form>
+                            </div>
+                            <div class="mt-2">
+
+                                <div class="d-flex flex-row p-3" th:each ="comment : ${comments}">
+                                    <div class="w-100">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div class="d-flex flex-row align-items-center">
+                                                <span class="mr-2" style="color: green; font-size: 22px;" th:text="${comment.username}"></span>
+                                                <div class="small-ratings">
+                                                    <i class="fa fa-star rating-color" style="margin-right: 0px;" th:each="i: ${#numbers.sequence(0,comment.fullStars-1)}"></i><i class="fa fa-star" style="margin-left: 0px;" th:each="i: ${#numbers.sequence(0,comment.emptyStars-1)}"></i>
+                                                </div>
+                                            </div>
+                                            <small>
+                                                <span th:text ="${comment.date}"> </span>
+                                                <span th:text = "${comment.time}"></span>
+
+                                            </small>
+                                        </div>
+                                        <p>" <span class="text-justify comment-text mb-0" style="font-size: 16px; font-weight: lighter; font-style: italic;" th:text="${comment.comment}"></span>  "</p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="card-body bg-light text-center">
-                            <div class="mb-2">
-                                <h4 class="font-weight-semibold mb-2">
-                                    <a href="#" class="text-default mb-2" data-abc="true">Kurs matura podstawowa</a>
-                                </h4>
-                            </div>
-                            <h3 class="mb-0 font-weight-semibold">150.00 zł</h3>
-                            <div>
-                               <i class="fa fa-star star"></i>
-                               <i class="fa fa-star star"></i>
-                               <i class="fa fa-star star"></i>
-                            </div>
-                            <div class="text-muted mb-3">Poziom podstawowy</div>
-                            <form  th:action="@{/cart/addToCart}"
-                                   method="post">
-                                <button type="submit" class="btn bg-cart">
-                                    <input type="hidden" th:name="productId" th:value="${3}" />
-                                    <i class="fa fa-cart-plus mr-2"> </i> Dodaj do koszyka
-                                </button>
-                            </form>                        </div>
-                    </div>                             
-</div> 
-<div style="position: fixed; top: 75px; left: 850px; width: 500px; height: 500px;">
-    <h2>KURS MATURA <h5> (podstawowa) </h5> </h2>
-        <hr style="border-width: 3px;">
-    <div>
-        <p>Kurs matury podstawowej zawiera wszystkie niezbędne zagadnienia przygotowujące uczestnika do matury
-            w zakresie podstawowym. Dlaczego warto wybrać nasz kurs? Matura podstawowa to w większości schematyczne, 
-            powtarzające się zadania - z nami nauczysz się je rozwiązywać!
-        </p>
-        <p>W kursie znajdziesz następujące zagadnienia:</p>
-        <ul >
-            <li>Algebra ( wszystkie możliwe równania)</li>
-            <li>Funkcje elementarne</li>
-            <li>Ciągi</li>
-            <li>Trygonometria</li>
-            <li>Planimetria</li>
-            <li>Geometria analityczna</li>
-            <li>Stereometria</li>
-            <li>Prawdopodobieństwo i kombinatoryka</li>
-
-          </ul>
-          <p></p>
-          <p>Dodatkowo: Do kursu dodajemy dodatkowe zestawy zadań wraz z rozwiązaniami i omówieniem - według nas nauka
-            poprzez praktykę jest najlepsza!
-          </p>
-          
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-</div>    
 </div>   
 </body>
 </html>

@@ -564,6 +564,27 @@ ul {
 .reset-option {
     display: none;
 }
+.containerStars {
+    font-size: 35px;
+    position: relative;
+    display: inline-block;
+}
+
+
+.star-under {
+    color: #ddd;
+    vertical-align: top;
+}
+.star-over {
+    color: #FFD700;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 30%;
+    overflow: hidden;
+}
+
+
 
 
 

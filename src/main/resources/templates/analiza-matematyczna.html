@@ -83,9 +83,9 @@
             </div>
             <h3 class="mb-0 font-weight-semibold">50.00 zł</h3>
             <div>
-               <i class="fa fa-star star"></i>
-               <i class="fa fa-star star"></i>
-               <i class="fa fa-star star"></i>
+                <i class="fa fa-star star"></i>
+                <i class="fa fa-star star"></i>
+                <i class="fa fa-star star"></i>
             </div>
 
             <div class="text-muted mb-3">Poziom podstawowy</div>
@@ -125,20 +125,41 @@
 </div>
 </div>
 
-<div style="position: relative; top: 90px; left: 150px; width: 1150px;">
-    <div class="height-100 container " style="width: 1150px;" >
-        <div class="card p-3" style="position: relative; width: 1150px; left: -20px;">
+
+<div style="position: relative; top: 90px; left: 150px; width: 1150px; border: 0.3px solid darkgrey; ">
+    <div class="height-100 container " style="width: 1130px;"  >
+        <div class="card p-3" style="position: relative; width: 1130px; left: -20px; border: none">
             <div class="d-flex justify-content-between align-items-center">
-                <div class="ratings">
-                    <h4> Średnia Ocena kursu: <span th:text="${opinion.averageStarsOpinions}"></span> / 5</h4>
-                    <i class="fa fa-star rating-color"></i>
-                    <i class="fa fa-star rating-color"></i>
-                    <i class="fa fa-star rating-color"></i>
-                    <i class="fa fa-star rating-color"></i>
-                    <i class="fa fa-star"></i>
+                <div class="ratings" th:if="${opinion.allOpinions != 0 }" >
+                    <h4> Średnia Ocena kursu: <span th:text="${opinion.averageStarsOpinions}"></span> / 5  <span style="position: relative; left: 630px;"> Ilość ocen:
+                        ( <span  th:text="${opinion.allOpinions}"></span> ) </span></h4>
+                    <div style="display: flex">
+                        <div style="position: relative; display: inline-block">
+                            <span  class="fa fa-star rating-color" style="font-size: 35px;" th:each="i: ${#numbers.sequence(0,opinion.fullStars-1)}"></span>
+                        </div>
+                        <div class="containerStars" th:if="${opinion.fractionStarWidth != 0}">
+                            <span class="star star-under fa fa-star"></span>
+                            <span class="star star-over fa fa-star"  th:style="'width: ' + ${opinion.fractionStarWidth} + '%;'"></span>
+                        </div>
+                        <div style="position: relative; display: inline-block">
+                            <span class="star star-under fa fa-star" style="font-size: 35px;" th:each="i: ${#numbers.sequence(0,opinion.emptyStars-1)}"></span>
+                        </div>
+                    </div>
                 </div>
-                <h5 class="review-count">Ilość ocen: ( <span th:text="${opinion.allOpinions}"></span> )</h5>
+                <div class="ratings" th:if="${opinion.allOpinions == 0 }" >
+                    <h4>Kurs nie ma jeszcze opinii - bądź pierwszy!</h4>
+                    <div style="display: flex">
+                        <div style="position: relative; display: inline-block">
+                            <span  class="fa fa-star rating-color" style="font-size: 35px;" ></span>
+                            <span  class="fa fa-star rating-color" style="font-size: 35px;" ></span>
+                            <span  class="fa fa-star rating-color" style="font-size: 35px;" ></span>
+                            <span  class="fa fa-star rating-color" style="font-size: 35px;" ></span>
+                            <span  class="fa fa-star rating-color" style="font-size: 35px;" ></span>
+                        </div>
+                    </div>
+                </div>
             </div>
+        </div>
 
 
             <div class="mt-5 d-flex justify-content-between align-items-center" >
@@ -198,6 +219,7 @@
                     <i class="fa fa-star"></i>
                 </div>
             </div>
+        <div>
             <div class="container mt-5 mb-5" style="width: 1130px;">
                 <div style="width: 1130px; position: relative; left: -45px; ">
                     <div class="col-md-7">
@@ -231,7 +253,8 @@
                                 <div class="d-flex flex-row p-3" th:each ="comment : ${comments}">
                                     <div class="w-100">
                                         <div class="d-flex justify-content-between align-items-center">
-                                            <div class="d-flex flex-row align-items-center"> <span class="mr-2" style="color: green; font-size: 22px;" th:text="${comment.username}"></span>
+                                            <div class="d-flex flex-row align-items-center">
+                                                <span class="mr-2" style="color: green; font-size: 22px;" th:text="${comment.username}"></span>
                                                 <div class="small-ratings">
                                                     <i class="fa fa-star rating-color" style="margin-right: 0px;" th:each="i: ${#numbers.sequence(0,comment.fullStars-1)}"></i><i class="fa fa-star" style="margin-left: 0px;" th:each="i: ${#numbers.sequence(0,comment.emptyStars-1)}"></i>
                                                 </div>
@@ -242,7 +265,7 @@
 
                                         </small>
                                         </div>
-                                        <p class="text-justify comment-text mb-0" style="font-size: 16px; font-weight: lighter; font-style: italic;" th:text="${comment.comment}"> </p>
+                                       <p>" <span class="text-justify comment-text mb-0" style="font-size: 16px; font-weight: lighter; font-style: italic;" th:text="${comment.comment}"></span>  "</p>
                                     </div>
                                 </div>
                             </div>

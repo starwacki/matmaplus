@@ -9,6 +9,7 @@ import java.util.List;
 @Setter
 @RequiredArgsConstructor
 @AllArgsConstructor
+@ToString
 public class CourseOpinionSectionDTO {
 
     @NonNull
@@ -29,5 +30,11 @@ public class CourseOpinionSectionDTO {
     private String averageStarsOpinions;
 
     private int allOpinions;
+
+    private int fullStars;
+
+    private int fractionStarWidth;
+
+    private int emptyStars;
 
 }

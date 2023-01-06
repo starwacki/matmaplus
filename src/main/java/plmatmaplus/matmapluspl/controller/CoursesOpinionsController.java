@@ -53,6 +53,7 @@ public class CoursesOpinionsController {
         model.addAttribute("cartItems",cartService.getCartSize(request));
         model.addAttribute("comments",courseOpinionsService.getCourseComments(CourseID.EXTENDED_MATH_ANALYSIS));
         model.addAttribute("opinion",courseOpinionsService.getCourseOpinionSectionDTO(CourseID.EXTENDED_MATH_ANALYSIS));
+        System.out.println(courseOpinionsService.getCourseOpinionSectionDTO(CourseID.EXTENDED_MATH_ANALYSIS).toString());
         return Views.ANALIZA_MATEMATYCZNA_ROZ_VIEW.toString();
     }
 

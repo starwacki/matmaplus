@@ -18,7 +18,7 @@ public class UserRegisterService {
     }
 
     public void registerUser(UserRegisterDTO userRegisterDTO) {
-        encodePassword(userRegisterDTO);
+    //    encodePassword(userRegisterDTO);
         save(userRegisterDTO);
     }
 

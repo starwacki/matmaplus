@@ -13,6 +13,30 @@
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <script>$(document).ready(function(){
+
+        $("input[type='radio']").click(function(){
+            var sim =  $("input[type='radio']:checked").val();
+            //alert(sim);
+            if (sim<3) {
+                $('.myratings').css('color','red');
+                $(".myratings").text(sim);
+            }else{
+                $('.myratings').css('color','green');
+                $(".myratings").text(sim);
+            }
+        });
+
+
+    });</script>
+    <script th:if="${param.rated}"> $(document).ready(function() {
+        $('#badComment').modal('show');
+    });
+    </script>
+    <script th:if="${param.opinionPicked}"> $(document).ready(function() {
+        $('#badComment').modal('show');
+    });
+    </script>
 </head> 
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -107,6 +131,23 @@
     </div>
 </div>
 
+<div th:attr="id=${'badComment'}" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p th:if="${param.rated}">Nie możesz ocenić drugi raz tego samego kursu!</p>
+                <p th:if="${param.opinionPicked}">Musisz wybrać ocene od 1 do 5!</p>
+            </div>
+
+        </div>
+    </div>
+</div>
+
 
 <div style="position: relative; top: 90px; left: 150px; width: 1150px; border: 0.3px solid darkgrey; ">
     <div class="height-100 container " style="width: 1130px;"  >
@@ -123,7 +164,7 @@
                             <span class="star star-under fa fa-star"></span>
                             <span class="star star-over fa fa-star"  th:style="'width: ' + ${opinion.fractionStarWidth} + '%;'"></span>
                         </div>
-                        <div style="position: relative; display: inline-block">
+                        <div style="position: relative; display: inline-block" th:if="${opinion.emptyStars != 0}" >
                             <span class="star star-under fa fa-star" style="font-size: 35px;" th:each="i: ${#numbers.sequence(0,opinion.emptyStars-1)}"></span>
                         </div>
                     </div>
@@ -238,7 +279,7 @@
                                             <div class="d-flex flex-row align-items-center">
                                                 <span class="mr-2" style="color: green; font-size: 22px;" th:text="${comment.username}"></span>
                                                 <div class="small-ratings">
-                                                    <i class="fa fa-star rating-color" style="margin-right: 0px;" th:each="i: ${#numbers.sequence(0,comment.fullStars-1)}"></i><i class="fa fa-star" style="margin-left: 0px;" th:each="i: ${#numbers.sequence(0,comment.emptyStars-1)}"></i>
+                                                    <i class="fa fa-star rating-color" style="margin-right: 0px;" th:each="i: ${#numbers.sequence(0,comment.fullStars-1)}"></i><i class="fa fa-star" style="margin-left: 0px;"  th:if="${comment.emptyStars !=0 }"  th:each="i: ${#numbers.sequence(0,comment.emptyStars-1)}"></i>
                                                 </div>
                                             </div>
                                             <small>

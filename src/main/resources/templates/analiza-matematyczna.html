@@ -29,6 +29,14 @@
 
 
 });</script>
+    <script th:if="${param.rated}"> $(document).ready(function() {
+        $('#badComment').modal('show');
+    });
+    </script>
+    <script th:if="${param.opinionPicked}"> $(document).ready(function() {
+        $('#badComment').modal('show');
+    });
+    </script>
 </head> 
 <body style="display: flex; flex-direction: column; height: 100%;">
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -125,6 +133,25 @@
 </div>
 </div>
 
+<div th:attr="id=${'badComment'}" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p th:if="${param.rated}">Nie możesz ocenić drugi raz tego samego kursu!</p>
+                <p th:if="${param.opinionPicked}">Musisz wybrać ocene od 1 do 5!</p>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
 
 <div style="position: relative; top: 90px; left: 150px; width: 1150px; border: 0.3px solid darkgrey; ">
     <div class="height-100 container " style="width: 1130px;"  >
@@ -141,7 +168,7 @@
                             <span class="star star-under fa fa-star"></span>
                             <span class="star star-over fa fa-star"  th:style="'width: ' + ${opinion.fractionStarWidth} + '%;'"></span>
                         </div>
-                        <div style="position: relative; display: inline-block">
+                        <div style="position: relative; display: inline-block" th:if="${opinion.emptyStars != 0}" >
                             <span class="star star-under fa fa-star" style="font-size: 35px;" th:each="i: ${#numbers.sequence(0,opinion.emptyStars-1)}"></span>
                         </div>
                     </div>

@@ -2,12 +2,20 @@ package plmatmaplus.matmapluspl.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import plmatmaplus.matmapluspl.controller.CourseID;
+import plmatmaplus.matmapluspl.controller.RedirectViews;
 import plmatmaplus.matmapluspl.dto.CourseCommentDTO;
 import plmatmaplus.matmapluspl.dto.CourseOpinionSectionDTO;
 import plmatmaplus.matmapluspl.entity.Comment;
+import plmatmaplus.matmapluspl.entity.Course;
 import plmatmaplus.matmapluspl.repository.CommentRepository;
+import plmatmaplus.matmapluspl.repository.CourseRepository;
+import plmatmaplus.matmapluspl.repository.UserRepository;
+
 import javax.servlet.http.HttpServletRequest;
 import java.text.DecimalFormat;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.*;
 
 @Service
@@ -15,20 +23,25 @@ public class CourseOpinionsService {
 
     private final CommentRepository commentRepository;
 
+    private final UserRepository userRepository;
+
+    private final CourseRepository courseRepository;
     @Autowired
-    CourseOpinionsService(CommentRepository commentRepository) {
+    CourseOpinionsService(CommentRepository commentRepository, UserRepository userRepository, CourseRepository courseRepository) {
         this.commentRepository = commentRepository;
+        this.userRepository = userRepository;
+        this.courseRepository = courseRepository;
     }
 
-    public CourseOpinionSectionDTO getCourseOpinionSectionDTO (long courseId) {
-        CourseOpinionSectionDTO courseOpinionSectionDTO = createCourseOpinionSectionDTO(courseId);
+    public CourseOpinionSectionDTO getCourseOpinionSectionDTO (CourseID courseId) {
+        CourseOpinionSectionDTO courseOpinionSectionDTO = createCourseOpinionSectionDTO(courseId.getCourseId());
         setAverageAndAllOpinions(courseOpinionSectionDTO);
         setCourseStars(courseOpinionSectionDTO);
         return courseOpinionSectionDTO;
     }
 
-    public List<CourseCommentDTO> getCourseComments(long courseId) {
-        return commentRepository.findAllByCourseIdCourses(courseId)
+    public List<CourseCommentDTO> getCourseComments(CourseID courseId) {
+        return commentRepository.findAllByCourseIdCourses(courseId.getCourseId())
                 .stream()
                 .sorted((o1, o2) -> {
                     if (o1.getDate().compareTo(o2.getDate())!=0)
@@ -42,12 +55,59 @@ public class CourseOpinionsService {
                 .toList();
     }
 
+    public void addCommentToCourse(long courseId,String comment,
+                                   HttpServletRequest request, int stars) {
+        commentRepository.save(createComment(comment,request,stars,courseId));
+    }
+
     public boolean isUserExist(HttpServletRequest request) {
         return request.getSession().getAttribute("user") != null;
     }
 
     public boolean isOpinionPicked(int stars) {
         return stars != 0;
+    }
+
+    public String getRedirectViewByCourseId(int courseID) {
+        String view = "";
+        switch (courseID) {
+            case 1 -> view = RedirectViews.BASE_MATH_ANALYSIS_VIEW.toString();
+            case 2 ->  view = RedirectViews.EXTENDED_MATH_ANALYSIS_VIEW.toString();
+            case 3 -> view = RedirectViews.BASE_EXAM_VIEW.toString();
+            case 4 -> view = RedirectViews.EXTENDED_EXAM_VIEW.toString();
+            case 5 -> view = RedirectViews.PRIMARY_SCHOOL_VIEW.toString();
+            case 6 ->  view = RedirectViews.INTEGRALS_VIEW.toString();
+        }
+        return view;
+    }
+
+    public boolean isUserRatedCourse(HttpServletRequest request,int courseId) {
+       return !commentRepository.findAllByCourseIdCoursesAndUsername( courseId,
+                getUsername(request)).isEmpty();
+    }
+
+
+
+    private Comment createComment(String comment, HttpServletRequest request, int stars,long courseId) {
+        Comment com= new Comment(comment, getUsername(request), LocalDate.now(), getTime(), stars);
+        com.setCourse(getCourse(courseId));
+        return com;
+    }
+
+    private Course getCourse(long courseId) {
+        return courseRepository.findByIdCourses(courseId).get();
+    }
+
+    private String getUsername(HttpServletRequest request) {
+        return userRepository.findByIdUsers(getUserId(request)).get().getUsername();
+    }
+
+    private long getUserId(HttpServletRequest request) {
+        return Long.parseLong(request.getSession().getAttribute("user").toString());
+    }
+
+    private String getTime() {
+        return LocalTime.now().getHour() + ":" + LocalTime.now().getMinute();
     }
 
 

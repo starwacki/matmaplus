@@ -11,5 +11,7 @@ public interface CommentRepository extends JpaRepository<Comment,Long> {
 
     List<Comment> findAllByCourseIdCoursesAndStarsIs(long courseId, int stars);
 
+    List<Comment> findAllByCourseIdCoursesAndUsername(long courseId, String username);
+
 
 }

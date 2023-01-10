@@ -54,6 +54,13 @@ List the ready features here:
 ![App Screenshot](https://i.imgur.com/tcWBQ4w.png)
 
 
+![App Screenshot](https://i.imgur.com/L3djCcq.png)
+
+
+![App Screenshot](https://i.imgur.com/gM0IGOp.png)
+
+
+
 
 
 

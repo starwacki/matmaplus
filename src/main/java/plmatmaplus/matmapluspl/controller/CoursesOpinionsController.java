@@ -1,7 +1,7 @@
 package plmatmaplus.matmapluspl.controller;
 
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,17 +12,13 @@ import plmatmaplus.matmapluspl.service.CourseOpinionsService;
 import javax.servlet.http.HttpServletRequest;
 
 @Controller
+@AllArgsConstructor
 public class CoursesOpinionsController {
 
     private final CourseOpinionsService courseOpinionsService;
 
     private final CartService cartService;
 
-    @Autowired
-    CoursesOpinionsController(CourseOpinionsService courseOpinionsService, CartService cartService) {
-        this.courseOpinionsService = courseOpinionsService;
-        this.cartService = cartService;
-    }
 
     @PostMapping("/matmaplus/comment")
     public String comment(@RequestParam(defaultValue = "0") int rating,
@@ -45,7 +41,7 @@ public class CoursesOpinionsController {
         model.addAttribute("cartItems",cartService.getCartSize(request));
         model.addAttribute("comments",courseOpinionsService.getCourseComments(CourseID.BASE_MATH_ANALYSIS));
         model.addAttribute("opinion",courseOpinionsService.getCourseOpinionSectionDTO(CourseID.BASE_MATH_ANALYSIS));
-        return Views.ANALIZA_MATEMATYCZNA_PODST_VIEW.toString();
+        return Views.BASE_MATH_ANALYSIS_VIEW.toString();
     }
 
     @RequestMapping("/matmaplus/shop/analizarozszerzona")
@@ -53,8 +49,7 @@ public class CoursesOpinionsController {
         model.addAttribute("cartItems",cartService.getCartSize(request));
         model.addAttribute("comments",courseOpinionsService.getCourseComments(CourseID.EXTENDED_MATH_ANALYSIS));
         model.addAttribute("opinion",courseOpinionsService.getCourseOpinionSectionDTO(CourseID.EXTENDED_MATH_ANALYSIS));
-        System.out.println(courseOpinionsService.getCourseOpinionSectionDTO(CourseID.EXTENDED_MATH_ANALYSIS).toString());
-        return Views.ANALIZA_MATEMATYCZNA_ROZ_VIEW.toString();
+        return Views.EXTENDED_MATH_ANALYSIS_VIEW.toString();
     }
 
     @RequestMapping("/matmaplus/shop/maturapodstawowa")
@@ -62,7 +57,7 @@ public class CoursesOpinionsController {
         model.addAttribute("cartItems",cartService.getCartSize(request));
         model.addAttribute("comments",courseOpinionsService.getCourseComments(CourseID.BASE_EXAM));
         model.addAttribute("opinion",courseOpinionsService.getCourseOpinionSectionDTO(CourseID.BASE_EXAM));
-        return Views.KURS_MATURA_PODST_VIEW.toString();
+        return Views.BASE_EXAM_VIEW.toString();
     }
 
     @RequestMapping("/matmaplus/shop/maturarozszerzona")
@@ -70,7 +65,7 @@ public class CoursesOpinionsController {
         model.addAttribute("cartItems",cartService.getCartSize(request));
         model.addAttribute("comments",courseOpinionsService.getCourseComments(CourseID.EXTENDED_EXAM));
         model.addAttribute("opinion",courseOpinionsService.getCourseOpinionSectionDTO(CourseID.EXTENDED_EXAM));
-        return Views.KURS_MATURA_ROZ_VIEW.toString();
+        return Views.EXTENDED_EXAM_VIEW.toString();
     }
 
 
@@ -79,7 +74,7 @@ public class CoursesOpinionsController {
         model.addAttribute("cartItems",cartService.getCartSize(request));
         model.addAttribute("comments",courseOpinionsService.getCourseComments(CourseID.PRIMARY_SCHOOL_EXAM));
         model.addAttribute("opinion",courseOpinionsService.getCourseOpinionSectionDTO(CourseID.PRIMARY_SCHOOL_EXAM));
-        return Views.EGZAMIN_ÓSMOKLASISTY_VIEW.toString();
+        return Views.PRIMARY_SCHOOL_EXAM_VIEW.toString();
     }
 
     @RequestMapping("/matmaplus/shop/całki")
@@ -87,7 +82,7 @@ public class CoursesOpinionsController {
         model.addAttribute("cartItems",cartService.getCartSize(request));
         model.addAttribute("comments",courseOpinionsService.getCourseComments(CourseID.INTEGRALS));
         model.addAttribute("opinion",courseOpinionsService.getCourseOpinionSectionDTO(CourseID.INTEGRALS));
-        return Views.CAŁKI_NA_STUDIACH_VIEW.toString();
+        return Views.INTEGRALS_VIEW.toString();
     }
 
 }

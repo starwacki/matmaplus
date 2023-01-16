@@ -1,22 +1,17 @@
 package plmatmaplus.matmapluspl.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import plmatmaplus.matmapluspl.service.CartService;
 import javax.servlet.http.HttpServletRequest;
 
-
-
 @Controller
+@AllArgsConstructor
 public class MainPageController {
 
     private CartService cartService;
-    @Autowired
-    public MainPageController(CartService cartService) {
-        this.cartService = cartService;
-    }
 
     @RequestMapping("/matmaplus/shop")
     public String shop(Model model, HttpServletRequest request) {

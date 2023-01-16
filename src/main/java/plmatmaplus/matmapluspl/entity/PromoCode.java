@@ -2,7 +2,6 @@ package plmatmaplus.matmapluspl.entity;
 
 
 import lombok.*;
-
 import javax.persistence.*;
 
 @Entity

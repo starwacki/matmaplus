@@ -1,8 +1,6 @@
 package plmatmaplus.matmapluspl.entity;
 
 import lombok.*;
-import org.hibernate.annotations.Fetch;
-
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -39,7 +37,7 @@ public class UserEntity {
             joinColumns = @JoinColumn(name = "users_idusers"),
             inverseJoinColumns = @JoinColumn(name =  "courses_idcourses")
     )
-    private List<Course> courses = new ArrayList<>();
+    private Set<Course> courses = new HashSet<>();
 
     @ManyToMany (
             fetch = FetchType.EAGER
@@ -48,14 +46,6 @@ public class UserEntity {
             joinColumns = @JoinColumn(name = "iduser"),
             inverseJoinColumns = @JoinColumn(name = "idrole"))
     private Set<Role> roles = new HashSet<>();
-
-    public void addCourseToUser(Course course) {
-            courses.add(course);
-    }
-
-    public void addRolesToUser(Role role) {
-         roles.add(role);
-    }
 
     @Override
     public String toString() {

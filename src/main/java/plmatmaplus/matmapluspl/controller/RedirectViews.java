@@ -16,13 +16,13 @@ package plmatmaplus.matmapluspl.controller;
      EXTENDED_MATH_ANALYSIS_VIEW("redirect:/matmaplus/shop/analizarozszerzona"),
      BASE_EXAM_VIEW("redirect:/matmaplus/shop/maturapodstawowa"),
      EXTENDED_EXAM_VIEW("redirect:/matmaplus/shop/maturarozszerzona"),
-     PRIMARY_SCHOOL_VIEW("redirect:/matmaplus/shop/egzamin-ósmioklasisty"),
+     PRIMARY_SCHOOL_EXAM_VIEW("redirect:/matmaplus/shop/egzamin-ósmioklasisty"),
      INTEGRALS_VIEW("redirect:/matmaplus/shop/całki");
 
 
 
     private final String endpoint;
-   RedirectViews(String endpoint) {
+    RedirectViews(String endpoint) {
         this.endpoint = endpoint;
     }
 

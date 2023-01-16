@@ -9,9 +9,7 @@ public enum CourseID {
      PRIMARY_SCHOOL_EXAM(5L),
      INTEGRALS(6L);
 
-     private  long courseId;
-
-     private String courseRedirectedLink;
+     private final long courseId;
 
      CourseID(long courseId) {
          this.courseId = courseId;

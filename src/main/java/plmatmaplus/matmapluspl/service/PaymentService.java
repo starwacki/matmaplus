@@ -1,37 +1,21 @@
 package plmatmaplus.matmapluspl.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.TransactionStatus;
-import org.springframework.transaction.support.TransactionTemplate;
-import plmatmaplus.matmapluspl.entity.Cart;
 import plmatmaplus.matmapluspl.entity.Course;
 import plmatmaplus.matmapluspl.repository.CartRepository;
 import plmatmaplus.matmapluspl.repository.UserRepository;
-
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import javax.servlet.http.HttpServletRequest;
-import javax.transaction.Status;
 import java.util.List;
+import java.util.Set;
 
 
 @Service
+@AllArgsConstructor
 public class PaymentService {
 
     private final UserRepository userRepository;
     private final CartRepository cartRepository;
-
-    private TransactionTemplate transactionTemplate;
-
-    private EntityManager entityManager;
-
-    @Autowired
-    PaymentService(UserRepository userRepository, CartRepository cartRepository) {
-        this.userRepository = userRepository;
-        this.cartRepository = cartRepository;
-
-    }
 
     public void pay(HttpServletRequest request) {
         addCoursesToUserCourses(getUserId(request));
@@ -50,7 +34,7 @@ public class PaymentService {
         userRepository.findByIdUsers((long) userId).get().getCourses().addAll(getCoursesInCart(userId));
     }
 
-    private List<Course> getCoursesInCart(int userId) {
+    private Set<Course> getCoursesInCart(int userId) {
         return cartRepository.findByUserId(userId).get().getCourses();
     }
 

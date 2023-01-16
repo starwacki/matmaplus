@@ -11,8 +11,7 @@ import plmatmaplus.matmapluspl.repository.CourseRepository;
 import plmatmaplus.matmapluspl.repository.PromoCodeRepository;
 import plmatmaplus.matmapluspl.repository.UserRepository;
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class CartService {
@@ -106,15 +105,18 @@ public class CartService {
                 .mapToDouble(courseCartDTO -> courseCartDTO.getPrice()).sum();
     }
 
-    private ArrayList<CourseCartDTO> getEmptyList() {
+    private List<CourseCartDTO> getEmptyList() {
         return new ArrayList<>();
     }
 
-    private List<Course> getCourses(HttpServletRequest request) {
+    private Set<Course> getCourses(HttpServletRequest request) {
         return cartRepository.findByUserId(getUserId(request)).get().getCourses();
     }
-    private List<CourseCartDTO> mapToCourseCartDTOList(List<Course> courses) {
-      return courses.stream().map(course -> mapToCourseCartDT(course)).toList();
+    private List<CourseCartDTO> mapToCourseCartDTOList(Set<Course> courses) {
+      return courses.stream()
+              .map(course -> mapToCourseCartDT(course))
+              .sorted(Comparator.comparing(CourseCartDTO::getIdCourses))
+              .toList();
     }
 
     private CourseCartDTO mapToCourseCartDT(Course course) {

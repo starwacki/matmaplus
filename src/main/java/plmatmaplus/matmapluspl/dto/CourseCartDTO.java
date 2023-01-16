@@ -21,4 +21,7 @@ public class CourseCartDTO {
     private String advancement;
 
     private String imgLink;
+
+
 }
+

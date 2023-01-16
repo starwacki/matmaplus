@@ -1,6 +1,6 @@
 package plmatmaplus.matmapluspl.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -8,19 +8,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import plmatmaplus.matmapluspl.dto.UserLoginDTO;
 import plmatmaplus.matmapluspl.service.UserLoginService;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 
 @Controller
+@AllArgsConstructor
 public class LoginController {
 
     private final UserLoginService userLoginService;
-
-    @Autowired
-    public LoginController(UserLoginService userLoginService) {
-        this.userLoginService = userLoginService;
-    }
 
     @RequestMapping("/matmaplus/login")
     public String login(Model model) {

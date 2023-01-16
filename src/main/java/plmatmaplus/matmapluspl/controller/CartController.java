@@ -1,24 +1,19 @@
 package plmatmaplus.matmapluspl.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import plmatmaplus.matmapluspl.dto.CourseCartDTO;
 import plmatmaplus.matmapluspl.dto.OrderDTO;
 import plmatmaplus.matmapluspl.service.CartService;
-
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
+@AllArgsConstructor
 public class CartController {
-    private CartService cartService;
-
-    @Autowired
-    public CartController(CartService cartService) {
-        this.cartService = cartService;
-    }
+    private final CartService cartService;
 
     @RequestMapping("/matmaplus/cart")
     public String cart(

@@ -1,24 +1,17 @@
 package plmatmaplus.matmapluspl.service;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import plmatmaplus.matmapluspl.dto.UserRegisterDTO;
 import plmatmaplus.matmapluspl.entity.UserEntity;
 import plmatmaplus.matmapluspl.repository.UserRepository;
 
 @Service
+@AllArgsConstructor
 public class UserRegisterService {
     private final UserRepository userRepository;
-    private final PasswordEncoder passwordEncoder;
-
-    @Autowired
-    public UserRegisterService(UserRepository userRepository,PasswordEncoder passwordEncoder) {
-        this.userRepository = userRepository;
-        this.passwordEncoder = passwordEncoder;
-    }
 
     public void registerUser(UserRegisterDTO userRegisterDTO) {
-    //    encodePassword(userRegisterDTO);
         save(userRegisterDTO);
     }
 
@@ -41,10 +34,6 @@ public class UserRegisterService {
 
     public boolean isPasswordSame(UserRegisterDTO userRegisterDTO) {
         return userRegisterDTO.getPassword().equals(userRegisterDTO.getRepeatedPassword());
-    }
-
-    public void encodePassword(UserRegisterDTO userRegisterDTO) {
-        userRegisterDTO.setPassword(passwordEncoder.encode(userRegisterDTO.getPassword()));
     }
 
     private UserEntity mapToUser(UserRegisterDTO userRegisterDTO) {

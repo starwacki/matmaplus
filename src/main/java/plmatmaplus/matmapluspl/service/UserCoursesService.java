@@ -1,27 +1,22 @@
 package plmatmaplus.matmapluspl.service;
 
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import plmatmaplus.matmapluspl.dto.UserCoursesDTO;
 import plmatmaplus.matmapluspl.entity.Course;
-import plmatmaplus.matmapluspl.repository.CourseRepository;
 import plmatmaplus.matmapluspl.repository.UserRepository;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.Set;
 
 @Service
+@AllArgsConstructor
 public class UserCoursesService {
 
-    private final CourseRepository courseRepository;
 
     private final UserRepository userRepository;
-
-    @Autowired
-    UserCoursesService(CourseRepository courseRepository,UserRepository userRepository) {
-        this.courseRepository = courseRepository;
-        this.userRepository = userRepository;
-    }
 
     public boolean isSessionExist(HttpServletRequest request) {
         return request.getSession().getAttribute("user")==null;
@@ -40,7 +35,7 @@ public class UserCoursesService {
              .toList();
     }
 
-    private List<Course> getUserCourses(Long userID) {
+    private Set<Course> getUserCourses(Long userID) {
         return userRepository.findByIdUsers(userID).get().getCourses();
     }
 

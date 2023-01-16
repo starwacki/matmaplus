@@ -3,8 +3,6 @@ package plmatmaplus.matmapluspl.dto;
 
 import lombok.*;
 
-import java.util.List;
-
 @Getter
 @Setter
 @RequiredArgsConstructor

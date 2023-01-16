@@ -1,6 +1,6 @@
 package plmatmaplus.matmapluspl.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import plmatmaplus.matmapluspl.controller.CourseID;
 import plmatmaplus.matmapluspl.controller.RedirectViews;
@@ -19,6 +19,7 @@ import java.time.LocalTime;
 import java.util.*;
 
 @Service
+@AllArgsConstructor
 public class CourseOpinionsService {
 
     private final CommentRepository commentRepository;
@@ -26,12 +27,7 @@ public class CourseOpinionsService {
     private final UserRepository userRepository;
 
     private final CourseRepository courseRepository;
-    @Autowired
-    CourseOpinionsService(CommentRepository commentRepository, UserRepository userRepository, CourseRepository courseRepository) {
-        this.commentRepository = commentRepository;
-        this.userRepository = userRepository;
-        this.courseRepository = courseRepository;
-    }
+
 
     public CourseOpinionSectionDTO getCourseOpinionSectionDTO (CourseID courseId) {
         CourseOpinionSectionDTO courseOpinionSectionDTO = createCourseOpinionSectionDTO(courseId.getCourseId());
@@ -75,7 +71,7 @@ public class CourseOpinionsService {
             case 2 ->  view = RedirectViews.EXTENDED_MATH_ANALYSIS_VIEW.toString();
             case 3 -> view = RedirectViews.BASE_EXAM_VIEW.toString();
             case 4 -> view = RedirectViews.EXTENDED_EXAM_VIEW.toString();
-            case 5 -> view = RedirectViews.PRIMARY_SCHOOL_VIEW.toString();
+            case 5 -> view = RedirectViews.PRIMARY_SCHOOL_EXAM_VIEW.toString();
             case 6 ->  view = RedirectViews.INTEGRALS_VIEW.toString();
         }
         return view;
@@ -190,14 +186,14 @@ public class CourseOpinionsService {
     }
 
     private CourseCommentDTO mapToCourseCommentDTO(Comment comment) {
-        return new CourseCommentDTO(
-                comment.getComment(),
-                comment.getUsername(),
-                comment.getDate().toString(),
-                comment.getTime(),
-                comment.getStars(),
-                getEmptyStars(comment.getStars())
-        );
+        return CourseCommentDTO.builder()
+                .comment(comment.getComment())
+                .username(comment.getUsername())
+                .date(comment.getDate().toString())
+                .time(comment.getTime())
+                .fullStars(comment.getStars())
+                .emptyStars(getEmptyStars(comment.getStars()))
+                .build();
     }
 
 

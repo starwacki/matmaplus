@@ -3,8 +3,8 @@ package plmatmaplus.matmapluspl.entity;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 
 @Getter
@@ -29,7 +29,7 @@ public class Cart {
     @JoinTable(name = "cart_courses",
             joinColumns = @JoinColumn(name = "cart_id"),
             inverseJoinColumns = @JoinColumn(name = "courses_idcourses"))
-    private List<Course> courses = new ArrayList<>();
+    private Set<Course> courses = new HashSet<>();
 
     @Override
     public String toString() {

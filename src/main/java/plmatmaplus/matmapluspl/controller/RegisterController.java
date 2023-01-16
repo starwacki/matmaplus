@@ -1,7 +1,7 @@
 package plmatmaplus.matmapluspl.controller;
 
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -11,14 +11,10 @@ import plmatmaplus.matmapluspl.dto.UserRegisterDTO;
 import plmatmaplus.matmapluspl.service.UserRegisterService;
 
 @Controller
+@AllArgsConstructor
 public class RegisterController {
 
     private final UserRegisterService userRegisterService;
-
-    @Autowired
-    public RegisterController( UserRegisterService userService) {
-        this.userRegisterService = userService;
-    }
 
     @RequestMapping("/matmaplus/register")
     public String register(Model model) {

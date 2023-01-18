@@ -30,6 +30,10 @@ public class CartService {
         this.userRepository = userRepository;
     }
 
+    public boolean isNoActiveSession(HttpServletRequest httpServletRequest) {
+        return httpServletRequest.getSession().getAttribute("user") == null;
+    }
+
     public int getCartSize(HttpServletRequest httpServletRequest) {
         if (isNoActiveSession(httpServletRequest))
             return EMPTY_CART;
@@ -37,10 +41,6 @@ public class CartService {
             return EMPTY_CART;
         else
             return getCoursesInCartSize(httpServletRequest);
-    }
-
-    public boolean isNoActiveSession(HttpServletRequest httpServletRequest) {
-        return httpServletRequest.getSession().getAttribute("user") == null;
     }
 
     public void addCourseToUserCart(HttpServletRequest request, Long courseId) {
@@ -57,7 +57,7 @@ public class CartService {
             return mapToCourseCartDTOList(getCourses(request));
     }
 
-    public OrderDTO getOrderWithPromoCode(List<CourseCartDTO> courseCartDTOList) {
+    public OrderDTO getOrderWithWrongPromoCode(List<CourseCartDTO> courseCartDTOList) {
         return new OrderDTO(getCartTotal(courseCartDTOList),
                 false,
                 0,
@@ -76,7 +76,7 @@ public class CartService {
         return promoCodeRepository.findPromoCodeByCode(promoCode).isPresent();
     }
 
-    public Integer getPromoCode(String code) {
+    public Integer getPromoCodePercentValue(String code) {
         return promoCodeRepository.findPromoCodeByCode(code).get().getPercentValue();
     }
 

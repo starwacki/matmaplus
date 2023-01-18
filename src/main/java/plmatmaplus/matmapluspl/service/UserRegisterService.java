@@ -1,6 +1,5 @@
 package plmatmaplus.matmapluspl.service;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import plmatmaplus.matmapluspl.dto.UserRegisterDTO;
 import plmatmaplus.matmapluspl.entity.UserEntity;
@@ -13,11 +12,6 @@ public class UserRegisterService {
 
     public void registerUser(UserRegisterDTO userRegisterDTO) {
         save(userRegisterDTO);
-    }
-
-    public void save(UserRegisterDTO userRegisterDTO) {
-        UserEntity userEntity = mapToUser(userRegisterDTO);
-        userRepository.save(userEntity);
     }
 
     public boolean isEmailTaken(UserRegisterDTO userRegisterDTO) {
@@ -34,6 +28,11 @@ public class UserRegisterService {
 
     public boolean isPasswordSame(UserRegisterDTO userRegisterDTO) {
         return userRegisterDTO.getPassword().equals(userRegisterDTO.getRepeatedPassword());
+    }
+
+    private void save(UserRegisterDTO userRegisterDTO) {
+        UserEntity userEntity = mapToUser(userRegisterDTO);
+        userRepository.save(userEntity);
     }
 
     private UserEntity mapToUser(UserRegisterDTO userRegisterDTO) {

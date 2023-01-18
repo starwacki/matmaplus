@@ -52,14 +52,14 @@ public class CartController {
 
     private String cartWithPromoCode( HttpServletRequest request,String code,Model model) {
         List<CourseCartDTO> coursesInCart = cartService.getCourseCartDTOList(request);
-        OrderDTO orderDTO = cartService.getOrderWithPromoCode(coursesInCart,cartService.getPromoCode(code));
+        OrderDTO orderDTO = cartService.getOrderWithPromoCode(coursesInCart,cartService.getPromoCodePercentValue(code));
         addCartAttributes(coursesInCart,request,model,orderDTO);
         return Views.CART_VIEW.toString();
     }
 
     private String cartWithWrongPromoCode(HttpServletRequest request,Model model) {
         List<CourseCartDTO> coursesInCart = cartService.getCourseCartDTOList(request);
-        OrderDTO orderDTO = cartService.getOrderWithPromoCode(coursesInCart);
+        OrderDTO orderDTO = cartService.getOrderWithWrongPromoCode(coursesInCart);
         addCartAttributes(coursesInCart,request,model,orderDTO);
         return RedirectViews.WRONG_PROMO_CODE_CART_VIEW.toString();
     }
@@ -73,7 +73,7 @@ public class CartController {
 
     private String getUserCart(HttpServletRequest request, Model model) {
         List<CourseCartDTO> coursesInCart = cartService.getCourseCartDTOList(request);
-        OrderDTO orderDTO = cartService.getOrderWithPromoCode(coursesInCart);
+        OrderDTO orderDTO = cartService.getOrderWithWrongPromoCode(coursesInCart);
         addCartAttributes(coursesInCart,request,model,orderDTO);
         return Views.CART_VIEW.toString();
     }

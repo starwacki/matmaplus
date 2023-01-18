@@ -1,7 +1,6 @@
 package plmatmaplus.matmapluspl.service;
 
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import plmatmaplus.matmapluspl.dto.UserLoginDTO;
 import plmatmaplus.matmapluspl.entity.UserEntity;

@@ -3,6 +3,7 @@ package plmatmaplus.matmapluspl.service;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import plmatmaplus.matmapluspl.dto.UserLoginDTO;
 import plmatmaplus.matmapluspl.entity.UserEntity;
@@ -13,11 +14,11 @@ import static org.mockito.Mockito.mock;
 
 class UserLoginServiceTest {
 
-    private static UserRepository userRepository;
-    private static UserLoginService userLoginService;
+    private  UserRepository userRepository;
+    private  UserLoginService userLoginService;
 
-    @BeforeAll
-    public static void initialize() {
+    @BeforeEach
+    public  void initialize() {
          userRepository = mock(UserRepository.class);
          userLoginService = new UserLoginService(userRepository);
     }

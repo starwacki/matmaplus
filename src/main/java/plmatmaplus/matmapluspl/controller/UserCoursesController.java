@@ -17,7 +17,7 @@ public class UserCoursesController {
 
     @RequestMapping("/user/courses")
     public String userCourses(HttpServletRequest request, Model model) {
-        if (userCoursesService.isSessionExist(request))
+        if (userCoursesService.isNoActiveSession(request))
             return RedirectViews.USER_MUST_LOGIN_VIEW.toString();
         else
             model.addAttribute("courses", userCoursesService.mapToUserCoursesDTOList(request));

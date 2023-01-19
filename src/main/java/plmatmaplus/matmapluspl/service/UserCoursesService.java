@@ -1,7 +1,6 @@
 package plmatmaplus.matmapluspl.service;
 
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import plmatmaplus.matmapluspl.dto.UserCoursesDTO;
 import plmatmaplus.matmapluspl.entity.Course;
@@ -18,7 +17,7 @@ public class UserCoursesService {
 
     private final UserRepository userRepository;
 
-    public boolean isSessionExist(HttpServletRequest request) {
+    public boolean isNoActiveSession(HttpServletRequest request) {
         return request.getSession().getAttribute("user")==null;
     }
 

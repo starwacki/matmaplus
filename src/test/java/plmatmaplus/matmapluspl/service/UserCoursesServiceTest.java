@@ -3,21 +3,17 @@ package plmatmaplus.matmapluspl.service;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.security.core.userdetails.UserDetails;
 import plmatmaplus.matmapluspl.dto.UserCoursesDTO;
 import plmatmaplus.matmapluspl.entity.Course;
 import plmatmaplus.matmapluspl.entity.CourseDetails;
 import plmatmaplus.matmapluspl.entity.UserEntity;
 import plmatmaplus.matmapluspl.repository.UserRepository;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
-
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
 

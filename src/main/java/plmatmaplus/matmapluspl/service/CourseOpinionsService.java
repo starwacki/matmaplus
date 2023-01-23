@@ -51,8 +51,7 @@ public class CourseOpinionsService {
                 .toList();
     }
 
-    public void addCommentToCourse(long courseId,String comment,
-                                   HttpServletRequest request, int stars) {
+    public void addCommentToCourse(long courseId,String comment, HttpServletRequest request, int stars) {
         commentRepository.save(createComment(comment,request,stars,courseId));
     }
 

@@ -21,7 +21,7 @@ public class LoginController {
     public String login(Model model) {
         UserLoginDTO user = new UserLoginDTO();
         model.addAttribute("userLoginDTO", user);
-        return "login.html";
+        return Views.LOGIN_VIEW.toString();
     }
 
     @RequestMapping("/matmaplus/logout")
@@ -31,7 +31,7 @@ public class LoginController {
         } catch (ServletException e) {
             throw new RuntimeException(e);
         }
-        return "redirect:/matmaplus/login?logout";
+        return RedirectViews.LOGOUT.toString();
     }
 
     @PostMapping("/matmaplus/loginuser")

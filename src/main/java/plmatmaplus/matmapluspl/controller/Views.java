@@ -1,6 +1,8 @@
 package plmatmaplus.matmapluspl.controller;
 
 enum Views {
+
+    LOGIN_VIEW("login.html"),
     USER_COURSES_VIEW("usercourses.html"),
     BASE_MATH_ANALYSIS_VIEW("analiza-matematyczna.html"),
     EXTENDED_MATH_ANALYSIS_VIEW("analiza-matematyczna-roz.html"),

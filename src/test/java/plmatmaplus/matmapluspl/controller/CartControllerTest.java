@@ -19,10 +19,9 @@ import static org.mockito.Mockito.verify;
 class CartControllerTest {
 
     @InjectMocks
-    CartController cartController;
-
+    private CartController cartController;
     @Mock
-    CartService cartService;
+    private CartService cartService;
 
     @Test
     void cart_whenSessionIsNoActive_shouldReturnUserMustLoginView() {

@@ -1,6 +1,8 @@
 package plmatmaplus.matmapluspl.controller;
 
  public enum RedirectViews {
+
+     LOGOUT("redirect:/matmaplus/login?logout"),
      WRONG_LOGIN_VIEW("redirect:/matmaplus/login?usererror"),
      SUCCESS_LOGIN_VIEW("redirect:/matmaplus/login?succes"),
      USER_MUST_LOGIN_VIEW("redirect:/matmaplus/login?mustlogin"),

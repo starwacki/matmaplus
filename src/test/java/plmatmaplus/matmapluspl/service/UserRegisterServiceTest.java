@@ -2,6 +2,10 @@ package plmatmaplus.matmapluspl.service;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 import plmatmaplus.matmapluspl.dto.UserRegisterDTO;
 import plmatmaplus.matmapluspl.entity.UserEntity;
 import plmatmaplus.matmapluspl.repository.UserRepository;
@@ -11,16 +15,13 @@ import static org.mockito.BDDMockito.given;
 import static org.mockito.BDDMockito.then;
 import static org.mockito.Mockito.mock;
 
+@ExtendWith(MockitoExtension.class)
 class UserRegisterServiceTest {
 
-    private UserRepository userRepository;
+    @InjectMocks
     private UserRegisterService userRegisterService;
-
-    @BeforeEach
-    public void initialize() {
-        userRepository = mock(UserRepository.class);
-        userRegisterService = new UserRegisterService(userRepository);
-    }
+    @Mock
+    private UserRepository userRepository;
 
     @Test
     void registerUser_shouldRegisterNewUser() {

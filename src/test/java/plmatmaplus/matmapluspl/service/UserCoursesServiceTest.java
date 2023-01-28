@@ -3,6 +3,10 @@ package plmatmaplus.matmapluspl.service;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 import plmatmaplus.matmapluspl.dto.UserCoursesDTO;
 import plmatmaplus.matmapluspl.entity.Course;
 import plmatmaplus.matmapluspl.entity.CourseDetails;
@@ -17,16 +21,13 @@ import java.util.Set;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
 
+@ExtendWith(MockitoExtension.class)
 class UserCoursesServiceTest {
 
-    private UserRepository userRepository;
+    @InjectMocks
     private UserCoursesService userCoursesService;
-
-    @BeforeEach
-    public   void initialize() {
-        userRepository = mock(UserRepository.class);
-        userCoursesService = new UserCoursesService(userRepository);
-    }
+    @Mock
+    private UserRepository userRepository;
 
     @Test
     void isNoActiveSession_whenSessionIsActive_shouldReturnFalse() {

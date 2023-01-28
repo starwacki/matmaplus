@@ -1,26 +1,22 @@
 package plmatmaplus.matmapluspl.service;
 
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 import plmatmaplus.matmapluspl.dto.UserLoginDTO;
 import plmatmaplus.matmapluspl.entity.UserEntity;
 import plmatmaplus.matmapluspl.repository.UserRepository;
 import java.util.Optional;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.mock;
-
+@ExtendWith(MockitoExtension.class)
 class UserLoginServiceTest {
-
-    private  UserRepository userRepository;
+    @InjectMocks
     private  UserLoginService userLoginService;
-
-    @BeforeEach
-    public  void initialize() {
-         userRepository = mock(UserRepository.class);
-         userLoginService = new UserLoginService(userRepository);
-    }
-
+    @Mock
+    private  UserRepository userRepository;
 
     @Test
     void existUser_shouldReturnUserExistTrue() {

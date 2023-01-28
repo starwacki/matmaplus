@@ -1,15 +1,17 @@
 package plmatmaplus.matmapluspl.service;
 
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 import plmatmaplus.matmapluspl.controller.CourseID;
 import plmatmaplus.matmapluspl.dto.CourseCommentDTO;
 import plmatmaplus.matmapluspl.dto.CourseOpinionSectionDTO;
 import plmatmaplus.matmapluspl.entity.Comment;
 import plmatmaplus.matmapluspl.entity.UserEntity;
 import plmatmaplus.matmapluspl.repository.CommentRepository;
-import plmatmaplus.matmapluspl.repository.CourseRepository;
 import plmatmaplus.matmapluspl.repository.UserRepository;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -21,20 +23,15 @@ import java.util.Optional;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
 
+@ExtendWith(MockitoExtension.class)
 class CourseOpinionsServiceTest {
 
+    @InjectMocks
     private CourseOpinionsService courseOpinionsService;
-    private CourseRepository courseRepository;
+    @Mock
     private UserRepository userRepository;
+    @Mock
     private CommentRepository commentRepository;
-
-    @BeforeEach
-    public void initialize() {
-        courseRepository = mock(CourseRepository.class);
-        userRepository = mock(UserRepository.class);
-        commentRepository = mock(CommentRepository.class);
-        courseOpinionsService = new CourseOpinionsService(commentRepository,userRepository,courseRepository);
-    }
 
     private void prepareCourseOpinions(int fiveStars,int fourStars,int threeStars,int twoStars, int oneStars) {
         long courseId = 1;

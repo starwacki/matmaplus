@@ -1,8 +1,11 @@
 package plmatmaplus.matmapluspl.service;
 
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 import plmatmaplus.matmapluspl.dto.CourseCartDTO;
 import plmatmaplus.matmapluspl.dto.OrderDTO;
 import plmatmaplus.matmapluspl.entity.*;
@@ -16,24 +19,19 @@ import java.util.*;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
 
+@ExtendWith(MockitoExtension.class)
 class CartServiceTest {
 
+    @InjectMocks
     private  CartService cartService;
+    @Mock
     private  CartRepository cartRepository;
+    @Mock
     private  CourseRepository courseRepository;
+    @Mock
     private  PromoCodeRepository promoCodeRepository;
+    @Mock
     private  UserRepository userRepository;
-
-
-    @BeforeEach
-    public  void initialize() {
-        cartRepository = mock(CartRepository.class);
-        courseRepository = mock(CourseRepository.class);
-        promoCodeRepository = mock(PromoCodeRepository.class);
-        userRepository = mock(UserRepository.class);
-        cartService = new CartService(cartRepository,courseRepository,promoCodeRepository,userRepository);
-    }
-
 
 
     @Test
@@ -62,11 +60,10 @@ class CartServiceTest {
         HttpSession session = mock(HttpSession.class);
         String attributeUser = "user";
         given(request.getSession()).willReturn(session);
+        given(request.getSession().getAttribute(attributeUser)).willReturn(null);
 
         //when
         boolean isNoActiveSession = cartService.isNoActiveSession(request);
-        given(request.getSession().getAttribute(attributeUser)).willReturn(null);
-
 
         //then
         Assertions.assertTrue(isNoActiveSession);

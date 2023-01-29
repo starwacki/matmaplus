@@ -16,22 +16,22 @@ public class MainPageController {
     @RequestMapping("/matmaplus/shop")
     public String shop(Model model, HttpServletRequest request) {
         model.addAttribute("cartItems",cartService.getCartSize(request));
-        return "shop.html";
+        return Views.SHOP_VIEW.toString();
     }
 
     @RequestMapping("/matmaplus")
     public String mainView() {
-        return "mainview.html";
+        return Views.MAIN_VIEW.toString();
     }
 
     @RequestMapping("/matmaplus/blog")
     public String blog() {
-        return "blog.html";
+        return Views.BLOG.toString();
     }
 
     @RequestMapping("/matmaplus/contact")
     public String contact() {
-        return "contact.html";
+        return Views.CONTACT.toString();
     }
 
 }
